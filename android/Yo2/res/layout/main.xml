@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1" android:id="screen" android:measureWithLargestChild="true"
+              android:longClickable="false" android:baselineAligned="false">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/yo" android:text="Yo"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/name"
+              android:text="Your Name"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Yo Louis"
+            android:id="@+id/label" android:layout_gravity="center_horizontal" android:layout_weight="1.0"
+            android:textStyle="bold" android:typeface="serif" android:autoText="false" android:capitalize="characters"
+            android:gravity="center" android:textSize="50dp" android:singleLine="false"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Message"
+            android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_weight="0"/>
+</LinearLayout>
+
