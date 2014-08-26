@@ -2,6 +2,7 @@ package com.example.Yo2;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,8 +20,7 @@ import org.w3c.dom.Text;
 
 import java.util.Random;
 
-public class MyActivity extends Activity
-{
+public class MyActivity extends Activity {
     // UI elements
     TextView messageLabel;
     EditText yoText;
@@ -32,7 +34,7 @@ public class MyActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //setContentView(R.layout.main);
+        //setContentView(R.layout.main);
 
         // connect elements to code
         //messageLabel = (TextView) findViewById(R.id.label);
@@ -50,7 +52,7 @@ public class MyActivity extends Activity
         yoText = new EditText(this);
         yoText.setText("Yo");
         messageText = new EditText(this);
-        messageText.setText("Your Name");
+        messageText.setHint("Your Name");
         // create button
         doStuff = new Button(this);
         doStuff.setText("Show Message");
@@ -73,25 +75,20 @@ public class MyActivity extends Activity
         setContentView(layout);
 
         // the button's listener
-        doStuff.setOnClickListener(new View.OnClickListener()
-        {
+        doStuff.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 // call this function when someone clicks the button
                 changeText();
             }
         });
 
         // text's listener
-        messageText.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        messageText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND)
-                {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
                     changeText();
                     handled = true;
                 }
@@ -99,11 +96,38 @@ public class MyActivity extends Activity
                 return handled;
             }
         });
+        messageText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // close keyboard
+                if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(messageText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+
+                // call function
+                changeText();
+
+                return true;
+            }
+        });
+
+        yoText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // close keyboard
+                if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(messageText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                return true;
+            }
+        });
+
     }
 
     // updates the text of the label
-    public void changeText()
-    {
+    public void changeText() {
         // changes background colour
         Random rnd = new Random();
         int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
