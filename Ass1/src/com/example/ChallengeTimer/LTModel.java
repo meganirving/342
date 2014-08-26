@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class LTModel {
 
     // FUNCTIONS
+    public void init()
+    {
+        challenges = new ArrayList<LTChallenge>();
+    }
     // get the amount of challenges
     public int getChallengeAmt()
     {
