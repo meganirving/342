@@ -1,5 +1,6 @@
 package com.example.ChallengeTimer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import com.example.ChallengeTimer.LTChallenge;
 import org.w3c.dom.Text;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,6 +39,7 @@ public class TimerFragment extends Fragment {
     // data
     public LTChallenge challenge;
     public Button button;
+    public Button otherButton;
     public TextView label;
     public TextView bTime;
     public TextView wTime;
@@ -54,6 +57,20 @@ public class TimerFragment extends Fragment {
     private LTTime bestTime;
     private LTTime worstTime;
     private long avgTime;
+
+    // overload onAttach
+    public void onAttach(Activity activity)
+    {
+        // call the regular one
+        super.onAttach(activity);
+        // set up the listener
+        listener = (TimerListener)activity;
+    }
+
+    public void setChallenge(LTChallenge newChallenge)
+    {
+        challenge = newChallenge;
+    }
 
     public void updateTimes()
     {
@@ -95,10 +112,7 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.timer, container, false);
 
-        // init the data
-        challenge = new LTChallenge();
-        challenge.init();
-        // button
+        // enums
         currState = buttonStates.start;
         // time data for later
         startTime = 0;
@@ -133,6 +147,7 @@ public class TimerFragment extends Fragment {
                 // save the current time
                 LTTime newTime = new LTTime();
                 newTime.setTime(currTime);
+                newTime.setDateRecorded(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
                 newTime.setComment(input.getText().toString());
                 challenge.addChallenge(newTime);
             }});
@@ -142,7 +157,7 @@ public class TimerFragment extends Fragment {
         // create the final alert
         final AlertDialog alert = alertBuilder.create();
 
-        // set up button
+        // set up main button
         button = (Button) rootView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +204,15 @@ public class TimerFragment extends Fragment {
                     // graphs are updated
                     updateTimes();
                 }
+            }
+        });
+        // set up other button
+        otherButton = (Button) rootView.findViewById(R.id.all);
+        otherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // tell the activity what challenge we're in
+                listener.buttonPressed(challenge);
             }
         });
 
@@ -253,4 +277,9 @@ public class TimerFragment extends Fragment {
             }
         }
     };
+
+    public interface TimerListener{
+        void buttonPressed(LTChallenge newChallenge);
+    }
+    private TimerListener listener;
 }

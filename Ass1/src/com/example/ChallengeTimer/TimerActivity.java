@@ -12,7 +12,9 @@ import com.example.ChallengeTimer.TimesFragment;
 /**
  * Created by Megan on 26/8/2014.
  */
-public class TimerActivity extends Activity {
+public class TimerActivity extends Activity
+        implements ChallengeFragment.ChallengeListener, TimerFragment.TimerListener {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +22,38 @@ public class TimerActivity extends Activity {
         setContentView(R.layout.main);
 
         // inflate timerfragment & add to container
-        FragmentManager fragManager = getFragmentManager();
-        FragmentTransaction fragTransaction = fragManager.beginTransaction();
+        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
 
-        TimerFragment timeFragment = new TimerFragment();
-        fragTransaction.add(R.id.frame, timeFragment);
+        ChallengeFragment challengeFragment = new ChallengeFragment();
+        fragTransaction.add(R.id.frame, challengeFragment);
         fragTransaction.commit();
+    }
+
+    // implementing listeners
+    @Override
+    public void selectChallenge(LTChallenge challenge) {
+
+        // create new fragment and set its challenge
+        TimerFragment timerFragment = new TimerFragment();
+        timerFragment.setChallenge(challenge);
+
+        // create transaction and swap new fragment in
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, timerFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    @Override
+    public void buttonPressed(LTChallenge challenge)
+    {
+        // create new fragment and set its challenge
+        TimesFragment timesFragment = new TimesFragment();
+        timesFragment.setChallenge(challenge);
+
+        // create transaction and swap new fragment in
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, timesFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

@@ -22,7 +22,7 @@ public class LTTime {
     {
         time = newTime;
     }
-    public void setDateRecorded(Date newDate)
+    public void setDateRecorded(String newDate)
     {
         dateRecorded = newDate;
     }
@@ -35,7 +35,7 @@ public class LTTime {
     {
         return time;
     }
-    public Date getDate()
+    public String getDate()
     {
         return dateRecorded;
     }
@@ -90,6 +90,6 @@ public class LTTime {
     // DATA
     private String comment;
     private long time;
-    private Date dateRecorded;
+    private String dateRecorded;
 
 }

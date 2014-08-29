@@ -30,6 +30,10 @@ public class LTChallenge {
         return times.size();
     }
     // add a time to the list
+    public ArrayList<LTTime> getTimes()
+    {
+        return times;
+    }
     public void addChallenge(LTTime newTime)
     {
         if (newTime != null)
