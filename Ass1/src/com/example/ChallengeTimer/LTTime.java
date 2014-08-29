@@ -39,6 +39,16 @@ public class LTTime {
     {
         return dateRecorded;
     }
+    public String toString()
+    {
+        String temp = LTTime.convertToString(time);
+        if (!comment.isEmpty())
+        {
+            temp += " (" + comment + ")";
+        }
+
+        return temp;
+    }
 
     // compare two "times"
     // returns 0 if a < b, 1 if a > b, and -1 if a == b
@@ -54,7 +64,6 @@ public class LTTime {
         else
             return -1;
     }
-
     // converts LTTime to a formatted string
     static public String convertToString(LTTime time)
     {
@@ -66,7 +75,6 @@ public class LTTime {
         // and return
         return temp;
     }
-
     // converts milliseconds to a formatted string
     static public String convertToString(long time)
     {

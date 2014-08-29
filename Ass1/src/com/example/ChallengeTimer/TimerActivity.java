@@ -23,8 +23,8 @@ public class TimerActivity extends Activity {
         FragmentManager fragManager = getFragmentManager();
         FragmentTransaction fragTransaction = fragManager.beginTransaction();
 
-        TimerFragment timerFragment = new TimerFragment();
-        fragTransaction.add(R.id.frame, timerFragment);
+        TimerFragment timeFragment = new TimerFragment();
+        fragTransaction.add(R.id.frame, timeFragment);
         fragTransaction.commit();
     }
 }

@@ -51,57 +51,72 @@ public class TimerFragment extends Fragment {
     public long startTime;
     public long currTime;
     public EditText input;
+    private LTTime bestTime;
+    private LTTime worstTime;
+    private long avgTime;
 
     public void updateTimes()
     {
-        LTTime Best = challenge.getTime(0);
-        LTTime Worst = challenge.getTime(1);
-        // TODO get average time
-        LinearLayout.LayoutParams lParams;
+        // only bother with this if there is at least one time to display
+        if (challenge.getTimeAmt() > 0)
+        {
+            LinearLayout.LayoutParams lParams;
 
-        // update labels
-        bTime.setText("Best Time: " + LTTime.convertToString(Best));
-        wTime.setText("Worst Time: " + LTTime.convertToString(Worst));
-        cTime.setText("Current Time: ");
-        // TODO average text
+            bestTime = challenge.getTime(0);
+            worstTime = challenge.getTime(1);
+            avgTime = challenge.getAvgTime();
 
-        // update worst graph
-        lParams = (LinearLayout.LayoutParams) worst.getLayoutParams();
-        lParams.weight = 1;
-        worst.requestLayout();
-        // update best graph
-        lParams = (LinearLayout.LayoutParams) best.getLayoutParams();
-        lParams.weight = (Best.getTime() / Worst.getTime());
-        best.requestLayout();
-        lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
-        lParams.weight = 0.0f;
-        // update current graph
-        current.requestLayout();
+            // update labels
+            bTime.setText("Best Time: " + bestTime.toString());
+            wTime.setText("Worst Time: " + worstTime.toString());
+            cTime.setText("Current Time: 00:00.0");
+            aTime.setText("Average Time: " + LTTime.convertToString(avgTime));
 
-        // TODO average graph
+            // update worst graph
+            lParams = (LinearLayout.LayoutParams) worst.getLayoutParams();
+            lParams.weight = 1.0f;
+            worst.setLayoutParams(lParams);
+            // update best graph
+            lParams = (LinearLayout.LayoutParams) best.getLayoutParams();
+            lParams.weight = (float)bestTime.getTime() / (float)worstTime.getTime();
+            best.setLayoutParams(lParams);
+            lParams = (LinearLayout.LayoutParams) average.getLayoutParams();
+            lParams.weight = (float)avgTime / (float)worstTime.getTime();
+            average.setLayoutParams(lParams);
+
+            // update current graph
+            lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
+            lParams.weight = 0.0f;
+            current.setLayoutParams(lParams);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.timer, container, false);
 
-        // init data
+        // init the data
         challenge = new LTChallenge();
         challenge.init();
+        // button
         currState = buttonStates.start;
+        // time data for later
         startTime = 0;
         currTime = 0;
+        // labels
         label = (TextView) rootView.findViewById(R.id.timer);
-        best = (LinearLayout) rootView.findViewById(R.id.bestgraph);
         bTime = (TextView) rootView.findViewById(R.id.bestlabel);
-        worst = (LinearLayout) rootView.findViewById(R.id.worstgraph);
         wTime = (TextView) rootView.findViewById(R.id.worstlabel);
-        average = (LinearLayout) rootView.findViewById(R.id.avgraph);
         aTime = (TextView) rootView.findViewById(R.id.avLabel);
+        cTime = (TextView) rootView.findViewById(R.id.currLabel);
+        // graphs
+        best = (LinearLayout) rootView.findViewById(R.id.bestgraph);
+        worst = (LinearLayout) rootView.findViewById(R.id.worstgraph);
+        average = (LinearLayout) rootView.findViewById(R.id.avgraph);
         current = (LinearLayout) rootView.findViewById(R.id.curr);
 
         // update (in this case, set) the time graphs
-        //updateTimes();
+        updateTimes();
 
         // create alert dialogue
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
@@ -137,6 +152,7 @@ public class TimerFragment extends Fragment {
                 if (currState == buttonStates.start)
                 {
                     // start timer
+                    startTimer(); // set current bar to full, if there are no other times
                     startTime = SystemClock.currentThreadTimeMillis();
                     timer = new Timer();
                     timer.schedule(new TimerTask()
@@ -171,7 +187,7 @@ public class TimerFragment extends Fragment {
                     button.setText("Start");
                     currState = buttonStates.start;
                     // graphs are updated
-                   // updateTimes();
+                    updateTimes();
                 }
             }
         });
@@ -179,46 +195,62 @@ public class TimerFragment extends Fragment {
         return rootView;
     }
 
+    public void startTimer()
+    {
+        // if there are no times yet
+        if (challenge.getTimeAmt() == 0)
+        {
+            LinearLayout.LayoutParams lParams = (LinearLayout.LayoutParams)current.getLayoutParams();
+            lParams.weight = 1.0f;
+            current.setLayoutParams(lParams);
+        }
+    }
+
+
     private Runnable update = new Runnable() {
         public void run() {
             // get current time
             currTime = SystemClock.currentThreadTimeMillis() - startTime;
 
             // update text
-            label.setText(LTTime.convertToString(currTime));
+            String newTime = LTTime.convertToString(currTime);
+            label.setText(newTime);
+            cTime.setText("Current Time: " + newTime);
 
-            // update graphs
-           /* LinearLayout.LayoutParams lParams;
-            LTTime Worst = challenge.getTime(1);
-            // if the current time is still better than the worst time
-            if (currTime < Worst.getTime())
+            // if there's at least one time
+            if (challenge.getTimeAmt() > 0)
             {
-                // just update the current time's graph
-                lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
-                lParams.weight = (currTime / Worst.getTime());
-                current.requestLayout();
+                // update graphs
+                LinearLayout.LayoutParams lParams;
+                // if the current time is still better than the worst time
+                if (currTime < worstTime.getTime())
+                {
+                    // just update the current time's graph
+                    lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
+                    lParams.weight = (float)currTime / (float)worstTime.getTime();
+                    current.setLayoutParams(lParams);
+                }
+                // if the current time is the new worst time
+                else
+                {
+                    // update curr graph
+                    lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
+                    lParams.weight = 1;
+                    current.setLayoutParams(lParams);
+                    // update "worst" graph
+                    lParams = (LinearLayout.LayoutParams) worst.getLayoutParams();
+                    lParams.weight = (float)worstTime.getTime() / (float)currTime;
+                    worst.setLayoutParams(lParams);
+                    // update best graph
+                    lParams = (LinearLayout.LayoutParams) best.getLayoutParams();
+                    lParams.weight = (float)bestTime.getTime() / (float)currTime;
+                    best.setLayoutParams(lParams);
+                    // update average graph
+                    lParams = (LinearLayout.LayoutParams) average.getLayoutParams();
+                    lParams.weight = (float)avgTime / (float)currTime;
+                    average.setLayoutParams(lParams);
+                }
             }
-            // if the current time is the new worst time
-            else
-            {
-                // get the best and average times
-                LTTime Best = challenge.getTime(0);
-                // TODO average time
-
-                // update curr graph
-                lParams = (LinearLayout.LayoutParams) current.getLayoutParams();
-                lParams.weight = 1;
-                current.requestLayout();
-                // update "worst" graph
-                lParams = (LinearLayout.LayoutParams) worst.getLayoutParams();
-                lParams.weight = (Worst.getTime() / currTime);
-                worst.requestLayout();
-                // update best graph
-                lParams = (LinearLayout.LayoutParams) best.getLayoutParams();
-                lParams.weight = (Best.getTime() / currTime);
-                best.requestLayout();
-                // TODO update average graph
-            }*/
         }
     };
 }

@@ -11,6 +11,15 @@ import java.util.ArrayList;
 public class LTChallenge {
 
     // FUNCTIONS
+    public LTChallenge()
+    {
+        times = new ArrayList<LTTime>();
+    }
+    public LTChallenge(String newName)
+    {
+        name = newName;
+        times = new ArrayList<LTTime>();
+    }
     public void init()
     {
         times = new ArrayList<LTTime>();
@@ -36,10 +45,26 @@ public class LTChallenge {
     {
         name = newName;
     }
+    public String toString() { return name; }
     // get name
     public String getName()
     {
         return name;
+    }
+    // get the average time of the list of times
+    public long getAvgTime()
+    {
+        long time = 0;
+
+        // add all the times
+        for (int i = 0; i < times.size(); i++)
+        {
+            time += times.get(i).getTime();
+        }
+
+        // divide by amount of times
+        time /= times.size();
+        return time;
     }
     // get times (best = 0, worst = 1)
     public LTTime getTime(int type)
@@ -56,14 +81,12 @@ public class LTChallenge {
                 temp = times.get(i);
             }
             // if found a new worst time
-            if (type == 1 && LTTime.Compare(times.get(i), temp) == 1)
+            else if (type == 1 && LTTime.Compare(times.get(i), temp) == 1)
             {
                 temp = times.get(i);
             }
 
-            return temp;
-
-            // idk about average yet
+            // idk about average
         }
 
         // return the best or worst time

@@ -23,69 +23,71 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" android:layout_weight="0.5" android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Best Time: "
+                android:id="@+id/bestlabel"/>
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" android:layout_weight="0.25" android:focusableInTouchMode="false"
-                >
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Best Time: "
-                    android:id="@+id/bestlabel"/>
+                android:weightSum="1">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent" android:background="#ffa1ff6c" android:id="@+id/bestgraph">
+                    android:layout_height="fill_parent" android:background="#ffa1ff6c" android:id="@+id/bestgraph"
+                    >
             </LinearLayout>
         </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Worst Time: "
+                android:id="@+id/worstlabel"/>
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:layout_weight="0.25">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Worst Time: "
-                    android:id="@+id/worstlabel"/>
+                android:layout_height="wrap_content" android:layout_weight="0.25" android:weightSum="1">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" android:background="#ffff6d64" android:id="@+id/worstgraph">
             </LinearLayout>
         </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Average Time: "
+                android:id="@+id/avLabel"/>
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:layout_weight="0.25">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Average Time: "
-                    android:id="@+id/avLabel"/>
+                android:layout_height="wrap_content" android:layout_weight="0.25" android:weightSum="1">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" android:background="#ff8ac0ff" android:id="@+id/avgraph">
             </LinearLayout>
         </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Current Time: "
+                android:id="@+id/currLabel"/>
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:layout_weight="0.25">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Current Time: "
-                    android:id="@+id/currLabel"/>
+                android:layout_height="wrap_content" android:layout_weight="0.25" android:weightSum="1.0">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent" android:background="#ffffffff" android:id="@+id/curr"/>
+                    android:layout_height="match_parent" android:background="#ffffffff" android:id="@+id/curr"
+                    />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

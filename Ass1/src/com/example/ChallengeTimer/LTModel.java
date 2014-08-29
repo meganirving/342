@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class LTModel {
 
     // FUNCTIONS
-    public void init()
+    public LTModel()
     {
         challenges = new ArrayList<LTChallenge>();
     }
@@ -30,6 +30,7 @@ public class LTModel {
     {
         return challenges.get(i);
     }
+    public ArrayList<LTChallenge> getList() { return challenges; }
 
 
     // DATA
