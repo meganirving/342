@@ -3,12 +3,13 @@ package com.example.ChallengeTimer;
 import android.text.format.Time;
 import com.example.ChallengeTimer.LTTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Megan on 26/8/2014.
  */
-public class LTChallenge {
+public class LTChallenge implements Serializable{
 
     // FUNCTIONS
     public LTChallenge()

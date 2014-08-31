@@ -1,12 +1,13 @@
 package com.example.ChallengeTimer;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 /**
  * Created by Megan on 26/8/2014.
  */
-public class LTTime {
+public class LTTime implements Serializable{
 
     // FUNCTIONS
     // setters

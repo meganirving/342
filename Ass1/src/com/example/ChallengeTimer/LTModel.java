@@ -2,13 +2,14 @@ package com.example.ChallengeTimer;
 
 import com.example.ChallengeTimer.LTChallenge;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Megan on 26/8/2014.
  */
 
-public class LTModel {
+public class LTModel implements Serializable{
 
     // FUNCTIONS
     public LTModel()
