@@ -23,6 +23,11 @@ public class ChallengeFragment extends Fragment {
     public EditText input;
     public Button button;
 
+    public void setModel(LTModel newModel)
+    {
+        model = newModel;
+    }
+
     // overload onAttach
     public void onAttach(Activity activity)
     {
@@ -37,13 +42,6 @@ public class ChallengeFragment extends Fragment {
     {
         View rootView = inflater.inflate(R.layout.challenge, container, false);
 
-        // create model
-        model = new LTModel();
-        model.addChallenge(new LTChallenge("Clap 20 Times Challenge"));
-        model.addChallenge(new LTChallenge("Say the Alphabet Challenge"));
-        model.addChallenge(new LTChallenge("100 Meter Sprint Challenge"));
-        model.addChallenge(new LTChallenge("Read the CSCI342 A1 spec Challenge"));
-
         // attach data to listview
         final ListView list = (ListView) rootView.findViewById(R.id.list);
         final ArrayAdapter<LTChallenge> adapter = new ArrayAdapter<LTChallenge>(getActivity(), android.R.layout.simple_list_item_1, model.getList());
@@ -54,7 +52,7 @@ public class ChallengeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // pass through the selected challenge to the listener
-                listener.selectChallenge((LTChallenge) parent.getItemAtPosition(position));
+                listener.selectChallenge((LTChallenge)parent.getItemAtPosition(position), model);
             }});
 
         // create alert dialogue
@@ -97,7 +95,7 @@ public class ChallengeFragment extends Fragment {
 
     // for interacting with the parent activity
     public interface ChallengeListener{
-        void selectChallenge(LTChallenge challenge);
+        void selectChallenge(LTChallenge challenge, LTModel newModel);
     }
     private ChallengeListener listener;
 }
