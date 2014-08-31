@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.ChallengeTimer.LTChallenge;
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Modifier;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,23 +38,25 @@ public class TimerFragment extends Fragment {
     };
 
     // data
-    public LTChallenge challenge;
-    public Button button;
-    public Button otherButton;
-    public TextView label;
-    public TextView bTime;
-    public TextView wTime;
-    public TextView aTime;
-    public TextView cTime;
-    public LinearLayout best;
-    public LinearLayout worst;
-    public LinearLayout average;
-    public LinearLayout current;
-    public buttonStates currState;
-    public Timer timer;
-    public long startTime;
-    public long currTime;
-    public EditText input;
+    private LTModel model;
+    private int challengeID;
+    private LTChallenge challenge;
+    private Button button;
+    private Button otherButton;
+    private TextView label;
+    private TextView bTime;
+    private TextView wTime;
+    private TextView aTime;
+    private TextView cTime;
+    private LinearLayout best;
+    private LinearLayout worst;
+    private LinearLayout average;
+    private LinearLayout current;
+    private buttonStates currState;
+    private Timer timer;
+    private long startTime;
+    private long currTime;
+    private EditText input;
     private LTTime bestTime;
     private LTTime worstTime;
     private long avgTime;
@@ -67,9 +70,13 @@ public class TimerFragment extends Fragment {
         listener = (TimerListener)activity;
     }
 
-    public void setChallenge(LTChallenge newChallenge)
+    public void setChallenge(LTModel newModel, int newID)
     {
-        challenge = newChallenge;
+        // need to keep track of the whole model for the parent activity
+        model = newModel;
+        challengeID = newID;
+        // keep track of the current challenge to speed up processing in this fragment
+        challenge = model.getChallengeAt(challengeID);
     }
 
     public void updateTimes()
@@ -149,7 +156,12 @@ public class TimerFragment extends Fragment {
                 newTime.setTime(currTime);
                 newTime.setDateRecorded(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
                 newTime.setComment(input.getText().toString());
-                challenge.addChallenge(newTime);
+                // update the model here
+                model.getChallengeAt(challengeID).addChallenge(newTime);
+                // pass it back to the parent activity
+                listener.updateModel(model);
+                // update the temp challenge
+                challenge = model.getChallengeAt(challengeID);
             }});
         // cancel button
         alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -232,7 +244,8 @@ public class TimerFragment extends Fragment {
 
 
     private Runnable update = new Runnable() {
-        public void run() {
+        public void run()
+        {
             // get current time
             currTime = SystemClock.currentThreadTimeMillis() - startTime;
 
@@ -280,6 +293,7 @@ public class TimerFragment extends Fragment {
 
     public interface TimerListener{
         void buttonPressed(LTChallenge newChallenge);
+        void updateModel(LTModel newModel);
     }
     private TimerListener listener;
 }

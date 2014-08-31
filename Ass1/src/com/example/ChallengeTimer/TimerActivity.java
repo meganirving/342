@@ -19,7 +19,7 @@ import java.io.*;
 public class TimerActivity extends Activity
         implements ChallengeFragment.ChallengeListener, TimerFragment.TimerListener {
 
-    LTModel model;
+    private LTModel model;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,11 @@ public class TimerActivity extends Activity
 
         // load model, otherwise create model
         model = LoadModel();
-        if (model == null)
+        if (model == null) {
             model = new LTModel();
+        }
+        else
+            Log.v("test", "definitely loaded??");
 
         // inflate timerfragment & add to container
         FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
@@ -45,28 +48,31 @@ public class TimerActivity extends Activity
     @Override
     public void onStop()
     {
+        super.onStop();
         // save model
-        try
+       try
         {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.bin")));
-            oos.writeObject(model);
-            oos.flush();
-            oos.close();
+            FileOutputStream ofile = getApplicationContext().openFileOutput("save.bin", Context.MODE_PRIVATE);
+            ObjectOutputStream ostream = new ObjectOutputStream(ofile);
+            ostream.writeObject(model);
+            //ostream.flush();
+            ostream.close();
+            Log.v("test", "saved??");
         }
         catch(Exception ex)
         {
             Log.v("Saving Error: ",ex.getMessage());
             ex.printStackTrace();
         }
-
     }
-
-    public LTModel LoadModel()
+   public LTModel LoadModel()
     {
         try
         {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("save.bin"));
-            model = (LTModel)ois.readObject();
+            FileInputStream ifile = getApplicationContext().openFileInput("save.bin");
+            ObjectInputStream istream = new ObjectInputStream(ifile);
+            model = (LTModel)istream.readObject();
+            Log.v("test", model.getList().toString());
             return model;
         }
         catch(Exception ex) {
@@ -75,10 +81,11 @@ public class TimerActivity extends Activity
             return null;
         }
     }
-
     @Override
     public  void onStart()
     {
+        super.onStart();
+
         model = LoadModel();
         if (model == null)
             model = new LTModel();
@@ -86,20 +93,25 @@ public class TimerActivity extends Activity
 
     // implementing listeners
     @Override
-    public void selectChallenge(LTChallenge challenge, LTModel newModel) {
+    public void selectChallenge(LTModel newModel, int newID) {
 
         // update model
         model = newModel;
 
         // create new fragment and set its challenge
         TimerFragment timerFragment = new TimerFragment();
-        timerFragment.setChallenge(challenge);
+        timerFragment.setChallenge(model, newID);
 
         // create transaction and swap new fragment in
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, timerFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+    @Override
+    public void updateModel(LTModel newModel)
+    {
+        model = newModel;
     }
     @Override
     public void buttonPressed(LTChallenge challenge)

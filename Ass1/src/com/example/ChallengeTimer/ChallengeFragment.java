@@ -19,9 +19,9 @@ import com.example.ChallengeTimer.LTModel;
  */
 public class ChallengeFragment extends Fragment {
 
-    public LTModel model;
-    public EditText input;
-    public Button button;
+    private LTModel model;
+    private EditText input;
+    private Button button;
 
     public void setModel(LTModel newModel)
     {
@@ -42,6 +42,9 @@ public class ChallengeFragment extends Fragment {
     {
         View rootView = inflater.inflate(R.layout.challenge, container, false);
 
+        //model = new LTModel();
+        //model.addChallenge(new LTChallenge("test"));
+
         // attach data to listview
         final ListView list = (ListView) rootView.findViewById(R.id.list);
         final ArrayAdapter<LTChallenge> adapter = new ArrayAdapter<LTChallenge>(getActivity(), android.R.layout.simple_list_item_1, model.getList());
@@ -52,7 +55,7 @@ public class ChallengeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // pass through the selected challenge to the listener
-                listener.selectChallenge((LTChallenge)parent.getItemAtPosition(position), model);
+                listener.selectChallenge(model, position);
             }});
 
         // create alert dialogue
@@ -70,8 +73,9 @@ public class ChallengeFragment extends Fragment {
                 // create new challenge if the user entered a name
                 if (!input.getText().toString().isEmpty()) {
                     model.addChallenge(new LTChallenge(input.getText().toString()));
-                    // update list
+                    // update list on the UI and parent activity
                     adapter.notifyDataSetChanged();
+                    listener.updateModel(model);
                 }
             }});
         // cancel button
@@ -90,12 +94,17 @@ public class ChallengeFragment extends Fragment {
             }
         });
 
+        // if this is the first time this has been run, show alert immediately!
+        if (model.getChallengeAmt() == 0)
+            alert.show();
+
         return rootView;
     }
 
     // for interacting with the parent activity
     public interface ChallengeListener{
-        void selectChallenge(LTChallenge challenge, LTModel newModel);
+        void selectChallenge(LTModel newModel, int newID);
+        void updateModel(LTModel newModel);
     }
     private ChallengeListener listener;
 }

@@ -31,6 +31,7 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="test" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.ChallengeTimer" />
   </component>
   <component name="ChangeListManager">
@@ -56,37 +57,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TimerFragment.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TimerFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3689">
-              <caret line="167" column="17" selection-start-line="167" selection-start-column="17" selection-end-line="167" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.63214284" vertical-offset="2067" max-vertical-offset="4369">
+              <caret line="164" column="16" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
               <folding>
-                <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+                <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+                <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+                <element signature="e#5904#6042#0" expanded="true" />
+                <element signature="e#6040#6041#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChallengeFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/ChallengeFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="1496">
-              <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
-              <folding>
-                <element signature="e#609#610#0" expanded="true" />
-                <element signature="e#641#642#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimerActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TimerActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29259896" vertical-offset="204" max-vertical-offset="1904">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="310" max-vertical-offset="663">
+              <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+              <folding>
+                <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+                <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+                <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+                <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+                <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+                <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LTChallenge.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTChallenge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="531" max-vertical-offset="969">
+              <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+              <folding>
+                <element signature="e#724#725#0" expanded="true" />
+                <element signature="e#752#753#0" expanded="true" />
+                <element signature="e#1050#1051#0" expanded="true" />
+                <element signature="e#1080#1081#0" expanded="true" />
+                <element signature="method#getAvgTime#0;class#LTChallenge#0" expanded="false" />
+                <element signature="method#getTime#0;class#LTChallenge#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,19 +109,22 @@
       <file leaf-file-name="LTModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="106" max-vertical-offset="493">
+              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimesFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimesFragment.java">
+      <file leaf-file-name="ChallengeFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/ChallengeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1547">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding>
+                <element signature="e#1085#1109#0" expanded="false" />
+                <element signature="e#1342#1355#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,12 +148,12 @@
         <option value="$PROJECT_DIR$/res/layout/row.xml" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/LTAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/TimesFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/LTTime.java" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/LTChallenge.java" />
-        <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/ChallengeFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java" />
         <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java" />
       </list>
     </option>
   </component>
@@ -207,20 +225,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChallengeTimer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ass1" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -286,19 +290,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -324,6 +315,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -472,7 +476,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -480,13 +484,13 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26143792" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267974" sideWeight="0.49924356" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.004901961" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49673203" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -496,8 +500,8 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329296" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -506,13 +510,13 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -525,8 +529,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2875817" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -548,15 +552,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerActivity.java</url>
-          <line>30</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="22" />
+      <option name="time" value="32" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -564,12 +560,46 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1904">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="765">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="714">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1564" max-vertical-offset="3825">
           <caret line="150" column="63" selection-start-line="150" selection-start-column="63" selection-end-line="150" selection-end-column="63" />
           <folding>
-            <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+            <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#5904#6042#0" expanded="true" />
+            <element signature="e#6040#6041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -589,6 +619,10 @@
           <folding>
             <element signature="e#724#725#0" expanded="true" />
             <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="method#getAvgTime#0;class#LTChallenge#0" expanded="false" />
+            <element signature="method#getTime#0;class#LTChallenge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -598,8 +632,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="799" max-vertical-offset="1836">
           <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="74" />
           <folding>
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#1085#1109#0" expanded="false" />
+            <element signature="e#1342#1355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -608,7 +642,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="1105">
           <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
-          <folding />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -632,7 +673,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -652,7 +700,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="3893">
           <caret line="85" column="75" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="75" />
           <folding>
-            <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+            <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#5904#6042#0" expanded="true" />
+            <element signature="e#6040#6041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -677,6 +728,10 @@
           <folding>
             <element signature="e#724#725#0" expanded="true" />
             <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="method#getAvgTime#0;class#LTChallenge#0" expanded="false" />
+            <element signature="method#getTime#0;class#LTChallenge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -686,8 +741,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="765">
           <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
           <folding>
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#1085#1109#0" expanded="false" />
+            <element signature="e#1342#1355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -704,7 +759,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -724,7 +786,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2816" max-vertical-offset="3859">
           <caret line="222" column="6" selection-start-line="222" selection-start-column="6" selection-end-line="222" selection-end-column="6" />
           <folding>
-            <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+            <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#5904#6042#0" expanded="true" />
+            <element signature="e#6040#6041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -744,6 +809,10 @@
           <folding>
             <element signature="e#724#725#0" expanded="true" />
             <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="method#getAvgTime#0;class#LTChallenge#0" expanded="false" />
+            <element signature="method#getTime#0;class#LTChallenge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -752,7 +821,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-          <folding />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -783,7 +859,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="391">
           <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
           <folding>
-            <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+            <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#5904#6042#0" expanded="true" />
+            <element signature="e#6040#6041#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -793,8 +872,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="374">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#1085#1109#0" expanded="false" />
+            <element signature="e#1342#1355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -803,13 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="374">
           <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/android SDK/sources/android-15/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30300" max-vertical-offset="72454">
-          <caret line="1953" column="0" selection-start-line="1953" selection-start-column="0" selection-end-line="1953" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -841,13 +913,6 @@
           <folding>
             <element signature="e#529231#529232#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/android SDK/sources/android-15/com/android/internal/os/ZygoteInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12569" max-vertical-offset="12988">
-          <caret line="786" column="0" selection-start-line="786" selection-start-column="0" selection-end-line="786" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -924,24 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/android SDK/sources/android-15/android/app/FragmentManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8675079" vertical-offset="12866" max-vertical-offset="32130">
-          <caret line="837" column="37" selection-start-line="837" selection-start-column="37" selection-end-line="837" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTChallenge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1513">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="e#724#725#0" expanded="true" />
-            <element signature="e#752#753#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTTime.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23407917" vertical-offset="0" max-vertical-offset="1343">
@@ -950,48 +997,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java">
+    <entry file="file://C:/android SDK/sources/android-15/android/app/FragmentManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5323529" vertical-offset="12858" max-vertical-offset="32130">
+          <caret line="831" column="56" selection-start-line="831" selection-start-column="56" selection-end-line="831" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimesFragment.java">
+    <entry file="file://C:/android SDK/sources/android-15/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="629">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="72625" max-vertical-offset="76058">
+          <caret line="4468" column="0" selection-start-line="4468" selection-start-column="0" selection-end-line="4468" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java">
+    <entry file="file://C:/android SDK/sources/android-15/android/app/Instrumentation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="3689">
-          <caret line="167" column="17" selection-start-line="167" selection-start-column="17" selection-end-line="167" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="16695" max-vertical-offset="26452">
+          <caret line="1059" column="0" selection-start-line="1059" selection-start-column="0" selection-end-line="1059" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/android SDK/sources/android-15/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="30324" max-vertical-offset="72454">
+          <caret line="1955" column="0" selection-start-line="1955" selection-start-column="0" selection-end-line="1955" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/android SDK/sources/android-15/com/android/internal/os/ZygoteInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12553" max-vertical-offset="12988">
+          <caret line="789" column="0" selection-start-line="789" selection-start-column="0" selection-end-line="789" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTChallenge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="616" max-vertical-offset="969">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
           <folding>
-            <element signature="method#updateTimes#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="method#getAvgTime#0;class#LTChallenge#0" expanded="false" />
+            <element signature="method#getTime#0;class#LTChallenge#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/ChallengeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="1496">
-          <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1547">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#1085#1109#0" expanded="false" />
+            <element signature="e#1342#1355#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52974504" vertical-offset="0" max-vertical-offset="578">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/LTModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="106" max-vertical-offset="493">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29259896" vertical-offset="204" max-vertical-offset="1904">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="310" max-vertical-offset="663">
+          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+          <folding>
+            <element signature="method#onCreate#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#LoadModel#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#selectChallenge#0;class#TimerActivity#0" expanded="false" />
+            <element signature="method#buttonPressed#0;class#TimerActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ChallengeTimer/TimerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63214284" vertical-offset="2067" max-vertical-offset="4369">
+          <caret line="164" column="16" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
+          <folding>
+            <element signature="class#buttonStates#0;class#TimerFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#TimerFragment#0" expanded="false" />
+            <element signature="e#5904#6042#0" expanded="true" />
+            <element signature="e#6040#6041#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

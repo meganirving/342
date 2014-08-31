@@ -33,7 +33,6 @@ public class LTModel implements Serializable{
     }
     public ArrayList<LTChallenge> getList() { return challenges; }
 
-
     // DATA
     private ArrayList<LTChallenge> challenges;
 }
