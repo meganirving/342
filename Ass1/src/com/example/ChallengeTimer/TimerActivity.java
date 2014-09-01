@@ -32,8 +32,6 @@ public class TimerActivity extends Activity
         if (model == null) {
             model = new LTModel();
         }
-        else
-            Log.v("test", "definitely loaded??");
 
         // inflate timerfragment & add to container
         FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
@@ -55,9 +53,7 @@ public class TimerActivity extends Activity
             FileOutputStream ofile = getApplicationContext().openFileOutput("save.bin", Context.MODE_PRIVATE);
             ObjectOutputStream ostream = new ObjectOutputStream(ofile);
             ostream.writeObject(model);
-            //ostream.flush();
             ostream.close();
-            Log.v("test", "saved??");
         }
         catch(Exception ex)
         {
@@ -72,7 +68,6 @@ public class TimerActivity extends Activity
             FileInputStream ifile = getApplicationContext().openFileInput("save.bin");
             ObjectInputStream istream = new ObjectInputStream(ifile);
             model = (LTModel)istream.readObject();
-            Log.v("test", model.getList().toString());
             return model;
         }
         catch(Exception ex) {

@@ -42,9 +42,6 @@ public class ChallengeFragment extends Fragment {
     {
         View rootView = inflater.inflate(R.layout.challenge, container, false);
 
-        //model = new LTModel();
-        //model.addChallenge(new LTChallenge("test"));
-
         // attach data to listview
         final ListView list = (ListView) rootView.findViewById(R.id.list);
         final ArrayAdapter<LTChallenge> adapter = new ArrayAdapter<LTChallenge>(getActivity(), android.R.layout.simple_list_item_1, model.getList());
