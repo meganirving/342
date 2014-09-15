@@ -3,14 +3,14 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:weightSum="1" android:id="screen" android:measureWithLargestChild="true"
+              android:weightSum="1" android:id="@+id/screen" android:measureWithLargestChild="true"
               android:longClickable="false" android:baselineAligned="false">
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/yo" android:text="Yo"/>
+            android:id="@+id/yo"/>
     <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/name"
-              android:text="Your Name"/>
+            />
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,8 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show Message"
-            android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_weight="0"/>
+            android:text="History"
+            android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_weight="0"
+            android:textSize="25dp" android:typeface="serif" android:onClick="onClick"/>
 </LinearLayout>
 
