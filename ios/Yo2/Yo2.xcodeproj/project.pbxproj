@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F06C6ED19C657DD009E03E8 /* yo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F06C6EC19C657DD009E03E8 /* yo.mp3 */; };
+		3F06C6F219C658F3009E03E8 /* SC_Yo1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F06C6EE19C658F3009E03E8 /* SC_Yo1.mp3 */; };
+		3F06C6F319C658F3009E03E8 /* SC_Yo2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F06C6EF19C658F3009E03E8 /* SC_Yo2.mp3 */; };
+		3F06C6F419C658F3009E03E8 /* SC_Yo3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F06C6F019C658F3009E03E8 /* SC_Yo3.mp3 */; };
+		3F06C6F519C658F3009E03E8 /* SC_Yo4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F06C6F119C658F3009E03E8 /* SC_Yo4.mp3 */; };
+		3F7C682319CC151A0080B058 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C682519CC151A0080B058 /* Localizable.strings */; };
+		3F9EB0ED19C2C5BD003745EB /* HistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9EB0EC19C2C5BD003745EB /* HistoryController.m */; };
+		3F9EB0EF19C2CEF6003745EB /* cartoon006.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F9EB0EE19C2CEF6003745EB /* cartoon006.mp3 */; };
+		3F9EB0F119C2CF0F003745EB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9EB0F019C2CF0F003745EB /* AVFoundation.framework */; };
+		3FB7694619BD206F00B9979D /* YoCatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7694519BD206F00B9979D /* YoCatchModel.m */; };
 		3FC9D2F7199C5D3C00D6BF74 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC9D2F6199C5D3C00D6BF74 /* Foundation.framework */; };
 		3FC9D2F9199C5D3C00D6BF74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC9D2F8199C5D3C00D6BF74 /* CoreGraphics.framework */; };
 		3FC9D2FB199C5D3C00D6BF74 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC9D2FA199C5D3C00D6BF74 /* UIKit.framework */; };
-		3FC9D301199C5D3C00D6BF74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9D2FF199C5D3C00D6BF74 /* InfoPlist.strings */; };
 		3FC9D303199C5D3D00D6BF74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9D302199C5D3D00D6BF74 /* main.m */; };
 		3FC9D307199C5D3D00D6BF74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9D306199C5D3D00D6BF74 /* AppDelegate.m */; };
 		3FC9D30A199C5D3D00D6BF74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9D308199C5D3D00D6BF74 /* Main.storyboard */; };
@@ -34,12 +43,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F06C6EC19C657DD009E03E8 /* yo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yo.mp3; sourceTree = "<group>"; };
+		3F06C6EE19C658F3009E03E8 /* SC_Yo1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SC_Yo1.mp3; sourceTree = "<group>"; };
+		3F06C6EF19C658F3009E03E8 /* SC_Yo2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SC_Yo2.mp3; sourceTree = "<group>"; };
+		3F06C6F019C658F3009E03E8 /* SC_Yo3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SC_Yo3.mp3; sourceTree = "<group>"; };
+		3F06C6F119C658F3009E03E8 /* SC_Yo4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SC_Yo4.mp3; sourceTree = "<group>"; };
+		3F7C682419CC151A0080B058 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3F7C682819CC15DD0080B058 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3F7C682A19CC15DD0080B058 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3F7C682D19CC1D5F0080B058 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3F9EB0EB19C2C5BD003745EB /* HistoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryController.h; sourceTree = "<group>"; };
+		3F9EB0EC19C2C5BD003745EB /* HistoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryController.m; sourceTree = "<group>"; };
+		3F9EB0EE19C2CEF6003745EB /* cartoon006.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cartoon006.mp3; sourceTree = "<group>"; };
+		3F9EB0F019C2CF0F003745EB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3FB7694419BD206F00B9979D /* YoCatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoCatchModel.h; sourceTree = "<group>"; };
+		3FB7694519BD206F00B9979D /* YoCatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoCatchModel.m; sourceTree = "<group>"; };
 		3FC9D2F3199C5D3C00D6BF74 /* Yo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC9D2F6199C5D3C00D6BF74 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3FC9D2F8199C5D3C00D6BF74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3FC9D2FA199C5D3C00D6BF74 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3FC9D2FE199C5D3C00D6BF74 /* Yo2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Yo2-Info.plist"; sourceTree = "<group>"; };
-		3FC9D300199C5D3C00D6BF74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3FC9D302199C5D3D00D6BF74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3FC9D304199C5D3D00D6BF74 /* Yo2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yo2-Prefix.pch"; sourceTree = "<group>"; };
 		3FC9D305199C5D3D00D6BF74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9EB0F119C2CF0F003745EB /* AVFoundation.framework in Frameworks */,
 				3FC9D2F9199C5D3C00D6BF74 /* CoreGraphics.framework in Frameworks */,
 				3FC9D2FB199C5D3C00D6BF74 /* UIKit.framework in Frameworks */,
 				3FC9D2F7199C5D3C00D6BF74 /* Foundation.framework in Frameworks */,
@@ -101,6 +125,7 @@
 		3FC9D2F5199C5D3C00D6BF74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F9EB0F019C2CF0F003745EB /* AVFoundation.framework */,
 				3FC9D2F6199C5D3C00D6BF74 /* Foundation.framework */,
 				3FC9D2F8199C5D3C00D6BF74 /* CoreGraphics.framework */,
 				3FC9D2FA199C5D3C00D6BF74 /* UIKit.framework */,
@@ -113,12 +138,16 @@
 			isa = PBXGroup;
 			children = (
 				3FC9D305199C5D3D00D6BF74 /* AppDelegate.h */,
+				3F9EB0EB19C2C5BD003745EB /* HistoryController.h */,
+				3F9EB0EC19C2C5BD003745EB /* HistoryController.m */,
 				3FC9D306199C5D3D00D6BF74 /* AppDelegate.m */,
 				3FC9D308199C5D3D00D6BF74 /* Main.storyboard */,
 				3FC9D30B199C5D3D00D6BF74 /* ViewController.h */,
 				3FC9D30C199C5D3D00D6BF74 /* ViewController.m */,
 				3FC9D30E199C5D3D00D6BF74 /* Images.xcassets */,
 				3FC9D2FD199C5D3C00D6BF74 /* Supporting Files */,
+				3FB7694419BD206F00B9979D /* YoCatchModel.h */,
+				3FB7694519BD206F00B9979D /* YoCatchModel.m */,
 			);
 			path = Yo2;
 			sourceTree = "<group>";
@@ -126,8 +155,14 @@
 		3FC9D2FD199C5D3C00D6BF74 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3F7C682519CC151A0080B058 /* Localizable.strings */,
+				3F06C6EE19C658F3009E03E8 /* SC_Yo1.mp3 */,
+				3F06C6EF19C658F3009E03E8 /* SC_Yo2.mp3 */,
+				3F06C6F019C658F3009E03E8 /* SC_Yo3.mp3 */,
+				3F06C6F119C658F3009E03E8 /* SC_Yo4.mp3 */,
+				3F06C6EC19C657DD009E03E8 /* yo.mp3 */,
+				3F9EB0EE19C2CEF6003745EB /* cartoon006.mp3 */,
 				3FC9D2FE199C5D3C00D6BF74 /* Yo2-Info.plist */,
-				3FC9D2FF199C5D3C00D6BF74 /* InfoPlist.strings */,
 				3FC9D302199C5D3D00D6BF74 /* main.m */,
 				3FC9D304199C5D3D00D6BF74 /* Yo2-Prefix.pch */,
 			);
@@ -211,6 +246,8 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				ru,
 			);
 			mainGroup = 3FC9D2EA199C5D3C00D6BF74;
 			productRefGroup = 3FC9D2F4199C5D3C00D6BF74 /* Products */;
@@ -228,8 +265,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F06C6F419C658F3009E03E8 /* SC_Yo3.mp3 in Resources */,
+				3F06C6ED19C657DD009E03E8 /* yo.mp3 in Resources */,
+				3F06C6F319C658F3009E03E8 /* SC_Yo2.mp3 in Resources */,
+				3F9EB0EF19C2CEF6003745EB /* cartoon006.mp3 in Resources */,
 				3FC9D30F199C5D3D00D6BF74 /* Images.xcassets in Resources */,
-				3FC9D301199C5D3C00D6BF74 /* InfoPlist.strings in Resources */,
+				3F7C682319CC151A0080B058 /* Localizable.strings in Resources */,
+				3F06C6F219C658F3009E03E8 /* SC_Yo1.mp3 in Resources */,
+				3F06C6F519C658F3009E03E8 /* SC_Yo4.mp3 in Resources */,
 				3FC9D30A199C5D3D00D6BF74 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,7 +292,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9EB0ED19C2C5BD003745EB /* HistoryController.m in Sources */,
 				3FC9D30D199C5D3D00D6BF74 /* ViewController.m in Sources */,
+				3FB7694619BD206F00B9979D /* YoCatchModel.m in Sources */,
 				3FC9D307199C5D3D00D6BF74 /* AppDelegate.m in Sources */,
 				3FC9D303199C5D3D00D6BF74 /* main.m in Sources */,
 			);
@@ -274,12 +319,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3FC9D2FF199C5D3C00D6BF74 /* InfoPlist.strings */ = {
+		3F7C682519CC151A0080B058 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3FC9D300199C5D3C00D6BF74 /* en */,
+				3F7C682419CC151A0080B058 /* en */,
+				3F7C682819CC15DD0080B058 /* fr */,
+				3F7C682D19CC1D5F0080B058 /* ru */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3FC9D308199C5D3D00D6BF74 /* Main.storyboard */ = {
@@ -294,6 +342,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3FC9D31F199C5D3D00D6BF74 /* en */,
+				3F7C682A19CC15DD0080B058 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -456,6 +505,7 @@
 				3FC9D327199C5D3D00D6BF74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FC9D328199C5D3D00D6BF74 /* Build configuration list for PBXNativeTarget "Yo2Tests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +514,7 @@
 				3FC9D32A199C5D3D00D6BF74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

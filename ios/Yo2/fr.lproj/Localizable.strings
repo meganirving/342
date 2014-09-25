@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Yo2
+
+  Created by student on 19/09/2014.
+  Copyright (c) 2014 University of Wollongong. All rights reserved.
+*/
+
+"Yo" = "Salut";
+"History" = "Histoire";
+"Name" = "Votre nom";
+"Msg" = "Salut\nJean-Paul!";
+"All" = "Tous les messages";
+"Back" = "Arrière";

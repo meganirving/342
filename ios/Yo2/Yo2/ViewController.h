@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface ViewController : UIViewController
 
+// regular data
+@property (nonatomic, strong) NSMutableArray* history;
+@property (nonatomic, strong) NSString* filePath;
+@property (nonatomic, strong) NSMutableArray* urls;
+
 // outlets
+@property (strong, nonatomic) IBOutlet UIButton *ButtonOutlet;
 @property (strong, nonatomic) IBOutlet UILabel *LabelOutlet;
 @property (strong, nonatomic) IBOutlet UITextField *YoOutlet;
 @property (strong, nonatomic) IBOutlet UITextField *NameOutlet;
+@property (strong, nonatomic) AVAudioPlayer* audioPlayer;
 
 // functions
 -(IBAction)hideKeyboard:(id)sender;

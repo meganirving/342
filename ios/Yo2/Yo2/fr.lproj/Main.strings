@@ -1,0 +1,15 @@
+
+/* Class = "IBUIButton"; normalTitle = "Show History"; ObjectID = "adt-C9-as8"; */
+"adt-C9-as8.normalTitle" = "Show History";
+
+/* Class = "IBUINavigationItem"; title = "All Messages"; ObjectID = "cDo-dw-RCu"; */
+"cDo-dw-RCu.title" = "All Messages";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "eP0-vB-HGJ"; */
+"eP0-vB-HGJ.title" = "Back";
+
+/* Class = "IBUITextField"; text = "Your name"; ObjectID = "fHL-2V-Fb7"; */
+"fHL-2V-Fb7.text" = "Your name";
+
+/* Class = "IBUITextField"; text = "Yo"; ObjectID = "qEu-wB-X8f"; */
+"qEu-wB-X8f.text" = "Yo";
