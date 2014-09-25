@@ -47,9 +47,7 @@ public class MyActivity extends Activity
         // connect elements to code
         messageLabel = (TextView) findViewById(R.id.label);
         yoText = (EditText) findViewById(R.id.yo);
-        yoText.setHint("Yo");
         messageText = (EditText) findViewById(R.id.name);
-        messageText.setHint("Your Name");
         doStuff = (Button) findViewById(R.id.button);
         layout = (LinearLayout) findViewById(R.id.screen);
 
@@ -80,7 +78,7 @@ public class MyActivity extends Activity
 
         // set up audio
         try {
-            AssetFileDescriptor afd = getAssets().openFd("cartoon019.mp3");
+            AssetFileDescriptor afd = getAssets().openFd("yo.mp3");
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             mediaPlayer.prepare();
@@ -106,7 +104,7 @@ public class MyActivity extends Activity
         layout.setBackgroundColor(color);
 
         // updates text
-        String msg = yoText.getText() + "\n" + messageText.getText();
+        String msg = yoText.getText() + "\n" + messageText.getText() + "!";
         messageLabel.setText(msg);
 
         // plays sound

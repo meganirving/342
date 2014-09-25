@@ -8,21 +8,25 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/yo"
             android:id="@+id/yo"/>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/name"
+    <EditText android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/name"
+              android:id="@+id/name"
             />
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Yo Louis"
+            android:text="@string/msg"
             android:id="@+id/label" android:layout_gravity="center_horizontal" android:layout_weight="1.0"
             android:textStyle="bold" android:typeface="serif" android:autoText="false" android:capitalize="characters"
             android:gravity="center" android:textSize="50dp" android:singleLine="false"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
+            android:text="@string/history"
             android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_weight="0"
             android:textSize="25dp" android:typeface="serif" android:onClick="onClick"/>
 </LinearLayout>

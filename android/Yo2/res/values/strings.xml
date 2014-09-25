@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Yo2</string>
+    <string name="app_name">Yo!</string>
+    <string name="yo">Yo</string>
+    <string name="name">Your name</string>
+    <string name="msg">Yo\nLouis!</string>
+    <string name="history">History</string>
 </resources>
