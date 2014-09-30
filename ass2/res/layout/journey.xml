@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+              android:layout_height="fill_parent" android:weightSum="1"
+              android:background="#ff49c8b0" android:orientation="vertical"
+              android:id="@+id/linearLayout">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
+                  android:layout_height="wrap_content" android:layout_weight="0.7" 
+                  android:layout_margin="5dp">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:gravity="center_vertical" android:background="#ffffffff" android:layout_weight="1">
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton" android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_rec"/>
+            <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:id="@+id/imageButton2" android:layout_gravity="center_horizontal"
+                         android:background="@drawable/ic_stop"/>
+            <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:id="@+id/imageButton3" android:layout_gravity="center_horizontal"
+                         android:background="@drawable/ic_camera"/>
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 android:layout_weight="0.3" android:background="#ffffffff" android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp" android:layout_marginBottom="5dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="MAP"
+                android:id="@+id/textView" android:layout_gravity="center" android:textColor="#ff000000"/>
+    </FrameLayout>
+</LinearLayout>
