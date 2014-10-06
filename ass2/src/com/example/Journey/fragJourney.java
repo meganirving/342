@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
@@ -36,6 +37,24 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
+        int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
+        switch (statusCode)
+        {
+            case ConnectionResult.SUCCESS:
+                Toast.makeText(this.getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                break;
+            case ConnectionResult.SERVICE_MISSING:
+                Toast.makeText(this.getActivity(), "SERVICE MISSING", Toast.LENGTH_SHORT).show();
+                break;
+            case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
+                Toast.makeText(this.getActivity(), "UPDATE REQUIRED", Toast.LENGTH_SHORT).show();
+                break;
+            //
+            // see http://developer.android.com/reference/com/google/android/gms/common/ConnectionResult.html for error code translation!!!
+            //
+            default: Toast.makeText(this.getActivity(), "Play Service result " + statusCode, Toast.LENGTH_SHORT).show();
+        }
+
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
         btnCam = (Button) root.findViewById(R.id.butCamera);
@@ -44,17 +63,13 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnStop.setOnClickListener(this);
 
         // create map
-        /*mapView = (MapView) root.findViewById(R.id.mapview);
+        mapView = (MapView) root.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         map = mapView.getMap();
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.setMyLocationEnabled(true);
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        //try {
-            MapsInitializer.initialize(this.getActivity());
-        //} catch (GooglePlayServicesNotAvailableException e) {
-        //    e.printStackTrace();
-       // }*/
+        MapsInitializer.initialize(this.getActivity());
 
         return root;
     }
