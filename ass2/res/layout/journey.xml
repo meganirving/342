@@ -37,5 +37,21 @@
                  android:layout_weight="0.7" android:background="#ffffffff" android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp" android:layout_marginBottom="5dp"
                  android:id="@+id/mapFrame">
+        <com.google.android.gms.maps.MapView android:id="@+id/mapview"
+                                             android:layout_width="fill_parent"
+                                             android:layout_height="fill_parent"
+                                             xmlns:map="http://schemas.android.com/apk/res-auto"
+                                             map:cameraBearing="112.5"
+                                             map:cameraTargetLat="-33.796923"
+                                             map:cameraTargetLng="150.922433"
+                                             map:cameraTilt="30"
+                                             map:cameraZoom="13"
+                                             map:mapType="terrain"
+                                             map:uiCompass="false"
+                                             map:uiRotateGestures="false"
+                                             map:uiScrollGestures="false"
+                                             map:uiTiltGestures="false"
+                                             map:uiZoomControls="false"
+                                             map:uiZoomGestures="false"/>
     </FrameLayout>
 </LinearLayout>

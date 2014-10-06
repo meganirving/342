@@ -11,10 +11,10 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.*;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Megan on 29/9/2014.
@@ -27,7 +27,10 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnRec;
     private Button btnCam;
     private Button btnStop;
+
+    // map stuff
     private GoogleMap map;
+    private MapView mapView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +43,18 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnStop = (Button) root.findViewById(R.id.butStop);
         btnStop.setOnClickListener(this);
 
-        // TODO: put a map in the map frame
+        // create map
+        /*mapView = (MapView) root.findViewById(R.id.mapview);
+        mapView.onCreate(savedInstanceState);
+        map = mapView.getMap();
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        map.setMyLocationEnabled(true);
+        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
+        //try {
+            MapsInitializer.initialize(this.getActivity());
+        //} catch (GooglePlayServicesNotAvailableException e) {
+        //    e.printStackTrace();
+       // }*/
 
         return root;
     }
@@ -101,8 +115,6 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     // called when the stop button is pressed
     public void StopButton(View v) {
 
-        SaveJourney("Untitled");
-
         // create an alertdialog for getting the journey name
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -132,8 +144,9 @@ public class fragJourney extends Fragment implements View.OnClickListener {
             }
         });
 
-        // Create the AlertDialog
+        // Create and show the dialog
         AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     // saves the journey to database, resets button visibility, and displays a toast
@@ -156,6 +169,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         Toast.makeText(context, text, duration).show();
     }
 
+    // deals with the buttons being clicked
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -169,5 +183,21 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 RecordButton(v);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+       // mapView.onResume();
+        super.onResume();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //mapView.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        //mapView.onLowMemory();
     }
 }
