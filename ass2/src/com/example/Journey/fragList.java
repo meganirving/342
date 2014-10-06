@@ -17,10 +17,13 @@ import java.util.List;
  */
 public class fragList extends Fragment {
 
+    private MySQLHelper mySQLHelper;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.list, container, false);
 
         return root;
     }
+
 }
