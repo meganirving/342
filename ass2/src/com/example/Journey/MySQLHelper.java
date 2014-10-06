@@ -100,8 +100,8 @@ public class MySQLHelper extends SQLiteOpenHelper {
         journey.setTitle(c.getString(c.getColumnIndex(COLUMN_TITlE)));
         return journey;
     }
-    public List<tblJourney> getAllJourneys() {
-        List<tblJourney> journeys = new ArrayList<tblJourney>();
+    public ArrayList<tblJourney> getAllJourneys() {
+        ArrayList<tblJourney> journeys = new ArrayList<tblJourney>();
 
         // get the cursor from the query
         Cursor cursor = database.query(MySQLHelper.TABLE_JOURNEYS,

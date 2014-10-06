@@ -64,9 +64,11 @@
       <file leaf-file-name="MySQLHelper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Journey/MySQLHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="969">
-              <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="1003">
+              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding>
+                <element signature="e#1386#1387#0" expanded="true" />
+                <element signature="e#1439#1440#0" expanded="true" />
                 <element signature="method#closeDB#0;class#MySQLHelper#0" expanded="false" />
                 <element signature="method#onUpgrade#0;class#MySQLHelper#0" expanded="false" />
                 <element signature="method#cursorToJourney#0;class#MySQLHelper#0" expanded="false" />
@@ -74,7 +76,7 @@
                 <element signature="method#createJourney#0;class#MySQLHelper#0" expanded="false" />
                 <element signature="method#getJourney#0;class#MySQLHelper#0" expanded="false" />
                 <element signature="method#getAllJourneys#0;class#MySQLHelper#0" expanded="false" />
-                <element signature="e#3486#3498#0" expanded="true" />
+                <element signature="e#3496#3508#0" expanded="true" />
                 <element signature="method#deleteJourney#0;class#MySQLHelper#0" expanded="false" />
               </folding>
             </state>
@@ -125,8 +127,21 @@
       <file leaf-file-name="fragList.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/Journey/fragList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23287672" vertical-offset="0" max-vertical-offset="584">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34931508" vertical-offset="0" max-vertical-offset="584">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -146,7 +161,6 @@
         <option value="$PROJECT_DIR$/res/drawable-mdpi/roundcorners.xml" />
         <option value="$PROJECT_DIR$/res/drawable-hdpi/roundcorners.xml" />
         <option value="$PROJECT_DIR$/res/drawable-ldpi/roundcorners.xml" />
-        <option value="$PROJECT_DIR$/res/layout/list.xml" />
         <option value="$PROJECT_DIR$/res/layout/slideshow.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/com/example/Journey/MyListener.java" />
@@ -159,6 +173,7 @@
         <option value="$PROJECT_DIR$/src/com/example/Journey/tblJourney.java" />
         <option value="$PROJECT_DIR$/src/com/example/Journey/tblPoint.java" />
         <option value="$PROJECT_DIR$/src/com/example/Journey/JourneyDataSource.java" />
+        <option value="$PROJECT_DIR$/res/layout/list.xml" />
         <option value="$PROJECT_DIR$/src/com/example/Journey/MySQLHelper.java" />
         <option value="$PROJECT_DIR$/src/com/example/Journey/fragList.java" />
       </list>
@@ -232,6 +247,38 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Journey" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ass2" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Journey" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ass2" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -255,7 +302,7 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="UGH" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../libproject/google-play-services_lib/libs/google-play-services.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../android/Yo2" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -807,17 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/slideshow.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -852,14 +888,6 @@
           <folding>
             <element signature="e#611#612#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -921,21 +949,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Journey/MySQLHelper.java">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="969">
-          <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
-          <folding>
-            <element signature="method#closeDB#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#onUpgrade#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#cursorToJourney#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#cursorToPoint#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#createJourney#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#getJourney#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="method#getAllJourneys#0;class#MySQLHelper#0" expanded="false" />
-            <element signature="e#3486#3498#0" expanded="true" />
-            <element signature="method#deleteJourney#0;class#MySQLHelper#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.20376712" vertical-offset="0" max-vertical-offset="584">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -958,10 +987,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Journey/MySQLHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="1003">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#1386#1387#0" expanded="true" />
+            <element signature="e#1439#1440#0" expanded="true" />
+            <element signature="method#closeDB#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#onUpgrade#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#cursorToJourney#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#cursorToPoint#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#createJourney#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#getJourney#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="method#getAllJourneys#0;class#MySQLHelper#0" expanded="false" />
+            <element signature="e#3496#3508#0" expanded="true" />
+            <element signature="method#deleteJourney#0;class#MySQLHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/Journey/fragList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23287672" vertical-offset="0" max-vertical-offset="584">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34931508" vertical-offset="0" max-vertical-offset="584">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
