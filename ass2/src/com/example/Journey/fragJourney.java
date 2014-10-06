@@ -38,9 +38,9 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
-        // open database
-        mySql = new MySQLHelper(getActivity());
-        mySql.open();
+        // get db helper
+        actJourney activity = (actJourney) getActivity();
+        mySql = activity.getMySql();
 
         // get buttons
         btnRec = (Button) root.findViewById(R.id.butRecord);
@@ -168,7 +168,6 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         // save the journey to the database
         tblJourney newJourney = new tblJourney(title, 0);
         mySql.createJourney(newJourney);
-        mySql.close();
 
         // create toast
         Context context = getActivity().getApplicationContext();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class actJourney extends Activity {
 
-    MySQLHelper mySql;
+    private MySQLHelper mySql;
 
     ActionBar.Tab tab1, tab2, tab3;
     Fragment fJourney = new fragJourney();
@@ -22,6 +22,10 @@ public class actJourney extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        // open the database
+        mySql = new MySQLHelper(this);
+        mySql.open();
 
         // get action bar
         ActionBar bar = getActionBar();
@@ -39,9 +43,6 @@ public class actJourney extends Activity {
         tab3 = bar.newTab().setIcon(R.drawable.ic_grid);
         tab3.setTabListener(new MyListener(fSlide));
         bar.addTab(tab3);
-
-        // open the database
-        mySql.open();
     }
 
     // when the app stops

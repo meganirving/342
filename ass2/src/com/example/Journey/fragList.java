@@ -24,17 +24,15 @@ public class fragList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.list, container, false);
 
+        // get the db helper
+        actJourney activity = (actJourney)getActivity();
+        mySql = activity.getMySql();
+
         // get the list frame
         ListView list = (ListView) root.findViewById(R.id.list);
-
+        
         // get all journeys
-        //mySql = new MySQLHelper(getActivity());
-        //mySql.open();
-        //journeys = mySql.getAllJourneys();
-
-        journeys = new ArrayList<tblJourney>();
-        journeys.add(new tblJourney("test 1", 0));
-        journeys.add(new tblJourney("journey 2", 1));
+        journeys = mySql.getAllJourneys();
 
         // create the adapter
         journeyAdapter adapter = new journeyAdapter(journeys, getActivity());
