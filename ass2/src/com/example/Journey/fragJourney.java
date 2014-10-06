@@ -28,6 +28,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnCam;
     private Button btnStop;
 
+    private MySQLHelper mySQLHelper;
+
     // map stuff
     private GoogleMap map;
     private MapView mapView;
@@ -200,4 +202,5 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         super.onLowMemory();
         //mapView.onLowMemory();
     }
+
 }

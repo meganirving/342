@@ -11,6 +11,8 @@ import java.util.List;
 
 public class actJourney extends Activity {
 
+    MySQLHelper mySql;
+
     ActionBar.Tab tab1, tab2, tab3;
     Fragment fJourney = new fragJourney();
     Fragment fList = new fragList();
@@ -37,5 +39,21 @@ public class actJourney extends Activity {
         tab3 = bar.newTab().setIcon(R.drawable.ic_grid);
         tab3.setTabListener(new MyListener(fSlide));
         bar.addTab(tab3);
+
+        // open the database
+        mySql.open();
+    }
+
+    // when the app stops
+    @Override
+    public void onStop() {
+        super.onStop();
+        // close the database
+        mySql.closeDB();
+    }
+
+    // get the activity's db reference
+    public MySQLHelper getMySql() {
+        return mySql;
     }
 }
