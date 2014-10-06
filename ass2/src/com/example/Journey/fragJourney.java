@@ -28,6 +28,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnCam;
     private Button btnStop;
 
+    private MySQLHelper mySql;
+
     // map stuff
     private GoogleMap map;
     private MapView mapView;
@@ -36,6 +38,11 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
+        // open database
+        mySql = new MySQLHelper(getActivity());
+        mySql.open();
+
+        // get buttons
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
         btnCam = (Button) root.findViewById(R.id.butCamera);
@@ -158,7 +165,10 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         // show the record button
         btnRec.setVisibility(View.VISIBLE);
 
-        // TODO: save the whole journey to the database
+        // save the journey to the database
+        tblJourney newJourney = new tblJourney(title, 0);
+        mySql.createJourney(newJourney);
+        mySql.close();
 
         // create toast
         Context context = getActivity().getApplicationContext();

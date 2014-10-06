@@ -28,9 +28,13 @@ public class fragList extends Fragment {
         ListView list = (ListView) root.findViewById(R.id.list);
 
         // get all journeys
-        mySql = new MySQLHelper(getActivity());
-        mySql.open();
-        journeys = mySql.getAllJourneys();
+        //mySql = new MySQLHelper(getActivity());
+        //mySql.open();
+        //journeys = mySql.getAllJourneys();
+
+        journeys = new ArrayList<tblJourney>();
+        journeys.add(new tblJourney("test 1", 0));
+        journeys.add(new tblJourney("journey 2", 1));
 
         // create the adapter
         journeyAdapter adapter = new journeyAdapter(journeys, getActivity());

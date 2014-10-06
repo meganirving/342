@@ -14,9 +14,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="false"
             android:textColor="#ff000000"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_centerHorizontal="true"
-            android:typeface="serif"/>
+            android:typeface="serif"
+            android:textIsSelectable="false"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
             android:id="@+id/listDate"
             android:layout_alignParentRight="true"
             android:textColor="#ff646464"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:typeface="serif"
             android:layout_below="@+id/listTitle"
             android:layout_margin="5dp"/>
@@ -38,7 +39,7 @@
             android:layout_below="@+id/listDate"
             android:layout_alignParentRight="true"
             android:textColor="#ff646464"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:typeface="serif"
             android:layout_margin="5dp"/>
 
@@ -50,7 +51,6 @@
             android:background="#ff39a6ae"
             android:padding="50dp"
             android:layout_margin="5dp"
-            android:id="@+idlistImg"
-            >
-    </FrameLayout>
+            android:id="@+id/listImg"
+            android:layout_alignTop="@+id/listTitle"></FrameLayout>
 </RelativeLayout>
