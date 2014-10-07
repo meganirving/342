@@ -79,8 +79,16 @@ public class MySQLHelper extends SQLiteOpenHelper {
     // adds a journey to the table
     public void createJourney(tblJourney journey) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, journey.getID());
+       // values.put(COLUMN_ID, journey.getID());
         values.put(COLUMN_TITlE, journey.getTitle());
+
+        long insertId = database.insert(TABLE_JOURNEYS, null,
+                values);
+        Cursor cursor = database.query(TABLE_JOURNEYS,
+                allColumns, COLUMN_ID + " = " + insertId, null,
+                null, null, null);
+
+        cursor.close();
     }
 
     // gets journey/s from the table
@@ -98,6 +106,8 @@ public class MySQLHelper extends SQLiteOpenHelper {
         tblJourney journey = new tblJourney();
         journey.setID(c.getInt(c.getColumnIndex(COLUMN_ID)));
         journey.setTitle(c.getString(c.getColumnIndex(COLUMN_TITlE)));
+
+        c.close();
         return journey;
     }
     public ArrayList<tblJourney> getAllJourneys() {

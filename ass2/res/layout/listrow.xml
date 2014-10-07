@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffffff">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/listTitle"
+            android:id="@+id/listTitle"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="false"
+            android:textColor="#ff000000"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:typeface="serif"
+            android:textIsSelectable="false"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/listDate"
+            android:id="@+id/listDate"
+            android:layout_alignParentRight="true"
+            android:textColor="#ff646464"
+            android:textSize="15dp"
+            android:typeface="serif"
+            android:layout_below="@+id/listTitle"
+            android:layout_margin="5dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/listDistance"
+            android:id="@+id/listDist"
+            android:layout_below="@+id/listDate"
+            android:layout_alignParentRight="true"
+            android:textColor="#ff646464"
+            android:textSize="15dp"
+            android:typeface="serif"
+            android:layout_margin="5dp"/>
+
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="#ff39a6ae"
+            android:padding="50dp"
+            android:layout_margin="5dp"
+            android:id="@+id/listImg"
+            android:layout_alignTop="@+id/listTitle"></FrameLayout>
+</RelativeLayout>

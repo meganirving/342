@@ -17,13 +17,29 @@ import java.util.List;
  */
 public class fragList extends Fragment {
 
-    private MySQLHelper mySQLHelper;
+    private MySQLHelper mySql;
+    private ArrayList<tblJourney> journeys;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.list, container, false);
 
+        // get the db helper
+        actJourney activity = (actJourney)getActivity();
+        mySql = activity.getMySql();
+
+        // get the list frame
+        ListView list = (ListView) root.findViewById(R.id.list);
+        
+        // get all journeys
+        journeys = mySql.getAllJourneys();
+
+        // create the adapter
+        journeyAdapter adapter = new journeyAdapter(journeys, getActivity());
+
+        // attach the adapter to the frame
+        list.setAdapter(adapter);
+
         return root;
     }
-
 }

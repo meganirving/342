@@ -4,4 +4,7 @@
     <string name="butStop">Stop Recording</string>
     <string name="butRecord">Record</string>
     <string name="butCamera">Take Photo</string>
+    <string name="listTitle">Title</string>
+    <string name="listDate">Date</string>
+    <string name="listDistance">Distance</string>
 </resources>
