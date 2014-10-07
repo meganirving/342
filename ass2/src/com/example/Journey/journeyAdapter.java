@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import org.w3c.dom.Text;
 
@@ -54,7 +55,7 @@ public class journeyAdapter extends ArrayAdapter<tblJourney> {
 
         // fill the views
         holder.title.setText(journey.getTitle());
-        holder.date.setText("6/10/2014");
+        holder.date.setText(journey.getDate());
         holder.distance.setText("5km");
 
         return convertView;

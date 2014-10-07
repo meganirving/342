@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Created by Megan on 6/10/2014.
  */
 public class tblJourney {
+    private String date;
     private int ID;
     private String title;
     private ArrayList<tblPoint> points;
@@ -17,10 +18,11 @@ public class tblJourney {
         title = "untitled";
         points = new ArrayList<tblPoint>();
     }
-    public tblJourney(String title, ArrayList<tblPoint> points, int ID) {
+    public tblJourney(String title, String date, ArrayList<tblPoint> points, int ID) {
         this.ID = ID;
         this.title = title;
         this.points = points;
+        this.date = date;
     }
 
     // getters
@@ -33,6 +35,9 @@ public class tblJourney {
     public ArrayList<tblPoint> getPoints() {
         return points;
     }
+    public String getDate() {
+        return date;
+    }
 
     // setters
     public void setID(int ID) {
@@ -43,6 +48,9 @@ public class tblJourney {
     }
     public void setTitle(String title)  {
         this.title = title;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
 
     // add new point

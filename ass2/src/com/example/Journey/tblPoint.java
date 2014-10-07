@@ -9,7 +9,7 @@ import java.util.Timer;
  */
 public class tblPoint {
 
-    private String Date;
+    private String timeStamp;
     private long Lat;
     private long Long;
     private String imgURL;
@@ -21,10 +21,10 @@ public class tblPoint {
         Long = 0;
         imgURL = "default";
         comment = "default";
-        Date = "";
+        timeStamp = "";
     }
-    public tblPoint(String Date, long Lat, long Long)  {
-        this.Date = Date;
+    public tblPoint(String timeStamp, long Lat, long Long)  {
+        this.timeStamp = timeStamp;
         this.Lat = Lat;
         this.Long = Long;
         this.imgURL = "default";
@@ -32,8 +32,8 @@ public class tblPoint {
     }
 
     // getters
-    public String getDate() {
-        return Date;
+    public String gettimeStamp() {
+        return timeStamp;
     }
     public long getLat() {
         return Lat;
@@ -49,8 +49,8 @@ public class tblPoint {
     }
 
     // setters
-    public void setDate(String Date) {
-        this.Date = Date;
+    public void settimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
     public void setLat(long Lat) {
         this.Lat = Lat;

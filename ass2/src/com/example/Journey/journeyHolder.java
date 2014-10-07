@@ -1,5 +1,6 @@
 package com.example.Journey;
 
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**

@@ -18,7 +18,8 @@
             android:layout_centerHorizontal="true"
             android:typeface="serif"
             android:textIsSelectable="false"
-            android:layout_toRightOf="@+id/listImg"/>
+            android:layout_toRightOf="@+id/listImg"
+            android:layout_margin="5dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
             android:textSize="15dp"
             android:typeface="serif"
             android:layout_below="@+id/listTitle"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            />
 
     <TextView
             android:layout_width="wrap_content"
@@ -42,7 +44,8 @@
             android:textColor="#ff646464"
             android:textSize="15dp"
             android:typeface="serif"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            />
 
     <FrameLayout
             android:layout_width="wrap_content"
@@ -54,4 +57,5 @@
             android:layout_margin="5dp"
             android:id="@+id/listImg"
             android:layout_alignTop="@+id/listTitle"></FrameLayout>
+
 </RelativeLayout>
