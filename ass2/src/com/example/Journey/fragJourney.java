@@ -7,8 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Html;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,17 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Megan on 29/9/2014.
  */
 public class fragJourney extends Fragment implements View.OnClickListener {
 
+    public static final int MEDIA_TYPE_IMAGE = 1;
     private boolean cam;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
@@ -32,6 +41,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnStop;
 
     private tblJourney currJourney;
+    private tblPoint currPoint;
     private MySQLHelper mySQLHelper;
 
     // map stuff
@@ -42,11 +52,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
+        currPoint = new tblPoint();
         currJourney = new tblJourney();
-
-        // see if the phone has a camera or not
-        //actJourney activity = (actJourney) getActivity();
-        //cam = activity.getCam();
 
         /*int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
         switch (statusCode)
@@ -107,28 +114,27 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public void CameraButton(View v) {
 
         // if the phone has a camera
-        //if (cam) {
+        if (cam) {
             // create Intent to take a picture and return control to the calling application
-            /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
             // start the image capture Intent
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
-        //    Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
-        //} else {
+            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        } else {
             // otherwise, open the album or whatever
-        //    Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
-        //}
+            Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
+        }
     }
 
     // when the camera intent returns
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        /*if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == getActivity().RESULT_OK) {
 
                 // create an alertdialog for adding an optional comment
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -141,32 +147,40 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 // add buttons
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button, so call the save function
-                        final String title = input.getText().toString();
+                        // User clicked OK button, so add the comment to the currpoint
+                        final String comment = input.getText().toString();
+                        currPoint.setComment(comment);
 
-                        // Image captured and saved to fileUri specified in the Intent
-                        Toast.makeText(getActivity(), "Image and caption saved", Toast.LENGTH_LONG).show();
+                        // add the point to the journey
+                        currJourney.addPoint(currPoint);
+
+                        // give the user an alert
+                        Toast.makeText(getActivity(), "Image and caption saved!", Toast.LENGTH_SHORT).show();
 
                     }
                 });
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        // Image captured and saved
-                        Toast.makeText(getActivity(), "Image saved", Toast.LENGTH_LONG).show();
+                        // add the point to the journey
+                        currJourney.addPoint(currPoint);
+
+                        // give the user an alert
+                        Toast.makeText(getActivity(), "Image saved!", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
                 // Create and show the dialog
                 AlertDialog dialog = alert.create();
                 dialog.show();
-            } else if (resultCode == RESULT_CANCELED) {
+            } else if (resultCode == getActivity().RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
                 // Image capturing failed somehow
-                Toast.makeText(getActivity(), "Image failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Image not saved", Toast.LENGTH_SHORT).show();
             }
-        }*/
+        }
     }
 
     // called when the stop button is pressed
@@ -259,4 +273,48 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         //mapView.onLowMemory();
     }
 
+    /** Create a file Uri for saving an image or video */
+    private Uri getOutputMediaFileUri(int type){
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    /** Create a File for saving an image or video */
+    private File getOutputMediaFile(int type){
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Journey");
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("Journey", "failed to create directory");
+                return null;
+            }
+        }
+        // Create a url
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        String url = mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg";
+        if (type == MEDIA_TYPE_IMAGE){
+            mediaFile = new File(url);
+        } else {
+            return null;
+        }
+
+        // add file data to the point
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        currPoint.setDate(formattedDate);
+
+        currPoint.setimgURL(url);
+
+        return mediaFile;
+    }
 }

@@ -9,10 +9,10 @@ import java.util.Timer;
  */
 public class tblPoint {
 
-    private String timeStamp;
+    private String Date;
     private long Lat;
     private long Long;
-    private String imgURL; //TODO: make actual
+    private String imgURL;
     private String comment;
 
     // constructors
@@ -21,10 +21,10 @@ public class tblPoint {
         Long = 0;
         imgURL = "default";
         comment = "default";
-        timeStamp = "";
+        Date = "";
     }
-    public tblPoint(String timeStamp, long Lat, long Long)  {
-        this.timeStamp = timeStamp;
+    public tblPoint(String Date, long Lat, long Long)  {
+        this.Date = Date;
         this.Lat = Lat;
         this.Long = Long;
         this.imgURL = "default";
@@ -32,8 +32,8 @@ public class tblPoint {
     }
 
     // getters
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getDate() {
+        return Date;
     }
     public long getLat() {
         return Lat;
@@ -49,8 +49,8 @@ public class tblPoint {
     }
 
     // setters
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setDate(String Date) {
+        this.Date = Date;
     }
     public void setLat(long Lat) {
         this.Lat = Lat;
@@ -63,11 +63,5 @@ public class tblPoint {
     }
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    // Will be used by the ArrayAdapter in the ListView
-    @Override
-    public String toString() {
-        return comment;
     }
 }
