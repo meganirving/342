@@ -7,4 +7,7 @@
     <string name="listTitle">Title</string>
     <string name="listDate">Date</string>
     <string name="listDistance">Distance</string>
+    <string name="btnPlay">Play Slideshow</string>
+    <string name="lblJourney">Journey:</string>
+    <string name="lblTime">Slide Duration:</string>
 </resources>
