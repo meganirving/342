@@ -31,6 +31,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnCam;
     private Button btnStop;
 
+    private tblJourney currJourney;
     private MySQLHelper mySQLHelper;
 
     // map stuff
@@ -40,6 +41,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
+
+        currJourney = new tblJourney();
 
         // see if the phone has a camera or not
         //actJourney activity = (actJourney) getActivity();
@@ -213,6 +216,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnRec.setVisibility(View.VISIBLE);
 
         // TODO: save the whole journey to the database
+
 
         // create toast
         Context context = getActivity().getApplicationContext();
