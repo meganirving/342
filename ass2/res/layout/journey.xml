@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-              android:layout_height="fill_parent" android:weightSum="1"
+              android:layout_height="match_parent" android:weightSum="1"
               android:background="#ff49c8b0" android:orientation="vertical"
               android:id="@+id/linearLayout">
     <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
-                  android:layout_height="wrap_content" android:layout_weight="0.3"
+                  android:layout_height="wrap_content" android:layout_weight="0.19"
                   android:layout_margin="5dp">
         <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
                       android:layout_height="fill_parent"
@@ -34,7 +34,7 @@
         </LinearLayout>
     </LinearLayout>
     <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                 android:layout_weight="0.7" android:background="#ffffffff" android:layout_marginLeft="5dp"
+                 android:layout_weight="0.81" android:background="#ffffffff" android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp" android:layout_marginBottom="5dp"
                  android:id="@+id/mapFrame">
         <com.google.android.gms.maps.MapView android:id="@+id/mapview"

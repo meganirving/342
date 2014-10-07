@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.*;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -14,12 +15,15 @@ import java.util.List;
  */
 public class fragList extends Fragment {
 
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+    private final GestureDetector detector = new GestureDetector(new SwipeGestureDetector());
+
     private MySQLHelper mySql;
     private ArrayList<tblJourney> journeys;
     private View root;
-    private LinearLayout textframe;
     private ListView listframe;
-    private FrameLayout imgframe;
+    private ViewFlipper flipper;
     private journeyAdapter adapter;
 
     @Override
@@ -32,8 +36,7 @@ public class fragList extends Fragment {
 
         // get the frames
         listframe = (ListView) root.findViewById(R.id.list);
-        textframe = (LinearLayout) root.findViewById(R.id.textframe);
-        imgframe = (FrameLayout) root.findViewById(R.id.imgframe);
+        flipper = (ViewFlipper) root.findViewById(R.id.flipper);
         
         // get all journeys
         journeys = mySql.getAllJourneys();
@@ -51,14 +54,60 @@ public class fragList extends Fragment {
         listframe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 // view the selected journey
                 tblJourney journey = (tblJourney) parent.getItemAtPosition(position);
                 viewJourney(journey);
             }
         });
 
+        // set the flipper's flippy functions
+        flipper.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(final View view, final MotionEvent event) {
+                detector.onTouchEvent(event);
+                return true;
+            }
+        });
+
         return root;
+    }
+
+    class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            try {
+                // right to left swipe
+                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right));
+                    flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_left));
+                    flipper.showNext();
+                    return true;
+                } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    // left to right swipe
+                    flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left));
+                    flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right));
+                    flipper.showPrevious();
+                    return true;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return false;
+        }
+    }
+
+    public void clearFlipper() {
+        flipper.removeAllViews();
+    }
+    public void addToFlipper(tblJourney journey) {
+        // loop through points
+        for (tblPoint point : journey.getPoints()) {
+            ImageView imageView = new ImageView(getActivity());
+            // TODO: add photo to imageview
+            flipper.addView(imageView);
+        }
     }
 
     // view the passed-in journey
@@ -66,19 +115,16 @@ public class fragList extends Fragment {
         // hide the list
         listframe.setVisibility(View.GONE);
 
-        // show the picture frame + map frame
-        imgframe.setVisibility(View.VISIBLE);
-        textframe.setVisibility(View.VISIBLE);
-
-        // fill the information
-        TextView text = (TextView) textframe.getChildAt(0);
-        text.setText(journey.getTitle());
+        // reset and show the flipper
+        clearFlipper();
+        addToFlipper(journey);
+        flipper.setVisibility(View.VISIBLE);
     }
 
     // delete the passed-in journey
     public void deleteJourney(tblJourney journey) {
         // delete it from the database
-        mySql.deleteJourney(journey.getID());
+        mySql.deleteJourney(journey);
 
         // delete it from the list and update the adapter
         adapter.remove(journey);

@@ -32,7 +32,6 @@ import java.util.Date;
 public class fragJourney extends Fragment implements View.OnClickListener {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
-    private boolean cam;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
     private View root;
@@ -52,8 +51,15 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
+        // get sqlhelper from the activity
+        actJourney activity = (actJourney) getActivity();
+        mySQLHelper = activity.getMySql();
+
+        // create a journey and a point
         currPoint = new tblPoint();
         currJourney = new tblJourney();
+        // set the ID of the journey to the largest ID in the database plus 1
+        currJourney.setID( mySQLHelper.getLastID() +1 );
 
         /*int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
         switch (statusCode)
@@ -113,20 +119,14 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     // called when the camera button is pressed
     public void CameraButton(View v) {
 
-        // if the phone has a camera
-        if (cam) {
-            // create Intent to take a picture and return control to the calling application
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // create Intent to take a picture and return control to the calling application
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
-            // start the image capture Intent
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-        } else {
-            // otherwise, open the album or whatever
-            Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
-        }
+        // start the image capture Intent
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 
     // when the camera intent returns
@@ -229,16 +229,20 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         // show the record button
         btnRec.setVisibility(View.VISIBLE);
 
-        // TODO: save the whole journey to the database
+        // add the date to the journey
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        currJourney.setDate(formattedDate);
 
+        // add the title to the journey
+        currJourney.setTitle(title);
 
-        // create toast
-        Context context = getActivity().getApplicationContext();
-        CharSequence text = "Journey saved!";
-        int duration = Toast.LENGTH_SHORT;
+        // save the journey to the database
+        mySQLHelper.createJourney(currJourney);
 
         // show toast
-        Toast.makeText(context, text, duration).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Journey saved!", Toast.LENGTH_SHORT).show();
     }
 
     // deals with the buttons being clicked
@@ -305,14 +309,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
             return null;
         }
 
-        // add file data to the point
-        Calendar c = Calendar.getInstance();
-        System.out.println("Current time => " + c.getTime());
-
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = df.format(c.getTime());
-        currPoint.setDate(formattedDate);
-
+        currPoint.settimeStamp(timeStamp);
         currPoint.setimgURL(url);
 
         return mediaFile;

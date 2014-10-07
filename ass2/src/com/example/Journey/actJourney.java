@@ -13,7 +13,7 @@ import java.util.List;
 
 public class actJourney extends Activity {
 
-    MySQLHelper mySql;
+    private MySQLHelper mySql;
 
     ActionBar.Tab tab1, tab2, tab3;
     Fragment fJourney = new fragJourney();
@@ -58,19 +58,5 @@ public class actJourney extends Activity {
     // get the activity's db reference
     public MySQLHelper getMySql() {
         return mySql;
-    }
-
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
-    }
-
-    public boolean getCam() {
-        return checkCameraHardware(this);
     }
 }

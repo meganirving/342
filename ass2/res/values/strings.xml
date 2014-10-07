@@ -10,4 +10,6 @@
     <string name="btnPlay">Play Slideshow</string>
     <string name="lblJourney">Journey:</string>
     <string name="lblTime">Slide Duration:</string>
+    <string name="btnResume">Play</string>
+    <string name="btnStop">Stop</string>
 </resources>

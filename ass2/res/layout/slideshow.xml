@@ -7,15 +7,19 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="0.3" android:background="#ffffffff"
+            android:layout_height="wrap_content"
+            android:background="#ffffffff"
             android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:id="@+id/frameBtn"
+            android:layout_weight="0.3">
 
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="@string/btnPlay"
-                android:id="@+id/btnPlay"
+                android:id="@+id/btnStart"
                 android:layout_margin="5dp"
                 android:background="#ff49c8b0"
                 android:textColor="#ffffffff"
@@ -26,42 +30,121 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="0.7" android:background="#ffffffff"
-            android:layout_margin="5dp">
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center_vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/lblJourney"
-                      android:id="@+id/textView2" android:textColor="#ff000000"
-                      android:layout_gravity="center_horizontal" android:layout_margin="10dp"
-                      android:typeface="serif"/>
+            android:layout_height="wrap_content"
+            android:background="#ffffffff"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="0.7"
+            android:id="@+id/frameOptions">
 
-            <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinJourney"
-                    android:layout_gravity="center_horizontal"
-                    android:spinnerMode="dropdown"
-                    android:background="#3249c8b0"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/lblJourney"
+                android:id="@+id/textView"
+                android:textColor="#ff000000"
+                android:layout_gravity="center_horizontal"
+                android:typeface="serif"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/lblTime"
-                      android:id="@+id/textView3" android:textColor="#ff000000"
-                      android:layout_gravity="center_horizontal" android:layout_margin="10dp"
-                      android:typeface="serif"/>
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinJourney"
+                android:layout_gravity="center_horizontal"
+                android:spinnerMode="dropdown"
+                android:background="#3249c8b0"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-            <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinTime"
-                    android:layout_gravity="center_horizontal"
-                    android:spinnerMode="dropdown"
-                    android:background="#3254c7ac"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-        </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/lblTime"
+                android:id="@+id/textView2"
+                android:textColor="#ff000000"
+                android:layout_gravity="center_horizontal"
+                android:typeface="serif"
+                android:layout_marginTop="10dp"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinTime"
+                android:layout_gravity="center_horizontal"
+                android:spinnerMode="dropdown"
+                android:background="#3254c7ac"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+
     </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/frameShow">
+
+        <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/flipper"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:layout_margin="5dp"
+                android:background="#ffff9f47"
+                android:clickable="false">
+
+        </ViewFlipper>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Example Comment"
+                android:id="@+id/comment"
+                android:visibility="visible"
+                android:layout_alignParentBottom="false"
+                android:background="#ff646464"
+                android:alpha="0.5"
+                android:textAlignment="center"
+                android:singleLine="false"
+                android:typeface="serif"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_centerVertical="true"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnStop"
+                android:id="@+id/btnStop"
+                android:background="#ff49c8b0"
+                android:textColor="#ffffffff"
+                android:typeface="serif"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:textSize="20dp"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnResume"
+                android:background="#ff49c8b0"
+                android:textColor="#ffffffff"
+                android:typeface="serif"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentBottom="true"
+                android:textSize="20dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/btnResume"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

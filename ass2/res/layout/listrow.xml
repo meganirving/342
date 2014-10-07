@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="#ffffffff">
 
     <TextView
@@ -32,7 +32,7 @@
             android:typeface="serif"
             android:layout_below="@+id/listTitle"
             android:layout_margin="5dp"
-            />
+            android:paddingEnd="5dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:textSize="15dp"
             android:typeface="serif"
             android:layout_margin="5dp"
-            />
+            android:paddingEnd="5dp"/>
 
     <FrameLayout
             android:layout_width="wrap_content"
@@ -56,6 +56,8 @@
             android:padding="50dp"
             android:layout_margin="5dp"
             android:id="@+id/listImg"
-            android:layout_alignTop="@+id/listTitle"></FrameLayout>
+            android:layout_alignTop="@+id/listTitle"
+            android:layout_alignParentBottom="false"
+            android:layout_alignBottom="@+id/listDist"></FrameLayout>
 
 </RelativeLayout>
