@@ -31,7 +31,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnCam;
     private Button btnStop;
 
-    private MySQLHelper mySQLHelper;
+    private MySQLHelper mySql;
+    private tblJourney currJourney;
 
     // map stuff
     private GoogleMap map;
@@ -41,9 +42,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
-        // see if the phone has a camera or not
-        //actJourney activity = (actJourney) getActivity();
-        //cam = activity.getCam();
+        // create journey
+        currJourney = new tblJourney();
 
         /*int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
         switch (statusCode)
@@ -63,6 +63,12 @@ public class fragJourney extends Fragment implements View.OnClickListener {
             default: Toast.makeText(this.getActivity(), "Play Service result " + statusCode, Toast.LENGTH_SHORT).show();
         }*/
 
+        // get db helper and camera status
+        actJourney activity = (actJourney) getActivity();
+        cam = activity.getCam();
+        mySql = activity.getMySql();
+
+        // get buttons
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
         btnCam = (Button) root.findViewById(R.id.butCamera);
@@ -92,10 +98,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnStop.setVisibility(View.VISIBLE);
 
         // display toast
-        Context context = getActivity().getApplicationContext();
-        CharSequence text = "Recording...";
-        int duration = Toast.LENGTH_SHORT;
-        Toast.makeText(context, text, duration).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Recording...", Toast.LENGTH_SHORT).show();
 
         // TODO: start collecting GPS information to put in the journey
     }
@@ -104,7 +107,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public void CameraButton(View v) {
 
         // if the phone has a camera
-        //if (cam) {
+        if (cam) {
             // create Intent to take a picture and return control to the calling application
             /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -113,11 +116,11 @@ public class fragJourney extends Fragment implements View.OnClickListener {
 
             // start the image capture Intent
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
-        //    Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
-        //} else {
+            Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+        } else {
             // otherwise, open the album or whatever
-        //    Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
-        //}
+            Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
+        }
     }
 
     // when the camera intent returns
@@ -138,8 +141,12 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 // add buttons
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button, so call the save function
-                        final String title = input.getText().toString();
+                        // User clicked OK button, so create a photo
+                        final String comment = input.getText().toString();
+
+                        tblPoint newPoint = new tblPoint();
+                        newPoint.setComment(comment);
+                        newPoint.set
 
                         // Image captured and saved to fileUri specified in the Intent
                         Toast.makeText(getActivity(), "Image and caption saved", Toast.LENGTH_LONG).show();
@@ -212,15 +219,12 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         // show the record button
         btnRec.setVisibility(View.VISIBLE);
 
-        // TODO: save the whole journey to the database
-
-        // create toast
-        Context context = getActivity().getApplicationContext();
-        CharSequence text = "Journey saved!";
-        int duration = Toast.LENGTH_SHORT;
+        // save the whole journey to the database
+        currJourney.setTitle(title);
+        mySql.createJourney(currJourney);
 
         // show toast
-        Toast.makeText(context, text, duration).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Saving...", Toast.LENGTH_SHORT).show();
     }
 
     // deals with the buttons being clicked

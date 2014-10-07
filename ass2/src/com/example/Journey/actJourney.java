@@ -19,14 +19,11 @@ public class actJourney extends Activity {
     Fragment fJourney = new fragJourney();
     Fragment fList = new fragList();
     Fragment fSlide = new fragSlideshow();
-    private boolean cam;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        //cam = checkCameraHardware(this);
 
         // get action bar
         ActionBar bar = getActionBar();
@@ -46,6 +43,7 @@ public class actJourney extends Activity {
         bar.addTab(tab3);
 
         // open the database
+        mySql = new MySQLHelper(this);
         mySql.open();
     }
 
@@ -73,6 +71,6 @@ public class actJourney extends Activity {
     }
 
     public boolean getCam() {
-        return cam;
+        return checkCameraHardware(this);
     }
 }
