@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -17,11 +19,14 @@ public class actJourney extends Activity {
     Fragment fJourney = new fragJourney();
     Fragment fList = new fragList();
     Fragment fSlide = new fragSlideshow();
+    private boolean cam;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        //cam = checkCameraHardware(this);
 
         // get action bar
         ActionBar bar = getActionBar();
@@ -55,5 +60,19 @@ public class actJourney extends Activity {
     // get the activity's db reference
     public MySQLHelper getMySql() {
         return mySql;
+    }
+
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
+        }
+    }
+
+    public boolean getCam() {
+        return cam;
     }
 }

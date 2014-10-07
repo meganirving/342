@@ -7,11 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class fragJourney extends Fragment implements View.OnClickListener {
 
+    private boolean cam;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
     private View root;
@@ -38,6 +41,28 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
+        // see if the phone has a camera or not
+        //actJourney activity = (actJourney) getActivity();
+        //cam = activity.getCam();
+
+        /*int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
+        switch (statusCode)
+        {
+            case ConnectionResult.SUCCESS:
+                Toast.makeText(this.getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                break;
+            case ConnectionResult.SERVICE_MISSING:
+                Toast.makeText(this.getActivity(), "SERVICE MISSING", Toast.LENGTH_SHORT).show();
+                break;
+            case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
+                Toast.makeText(this.getActivity(), "UPDATE REQUIRED", Toast.LENGTH_SHORT).show();
+                break;
+            //
+            // see http://developer.android.com/reference/com/google/android/gms/common/ConnectionResult.html for error code translation!!!
+            //
+            default: Toast.makeText(this.getActivity(), "Play Service result " + statusCode, Toast.LENGTH_SHORT).show();
+        }*/
+
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
         btnCam = (Button) root.findViewById(R.id.butCamera);
@@ -52,11 +77,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.setMyLocationEnabled(true);
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        //try {
-            MapsInitializer.initialize(this.getActivity());
-        //} catch (GooglePlayServicesNotAvailableException e) {
-        //    e.printStackTrace();
-       // }*/
+        MapsInitializer.initialize(this.getActivity());*/
 
         return root;
     }
@@ -81,35 +102,66 @@ public class fragJourney extends Fragment implements View.OnClickListener {
 
     // called when the camera button is pressed
     public void CameraButton(View v) {
-        /*
-         // create Intent to take a picture and return control to the calling application
-    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+        // if the phone has a camera
+        //if (cam) {
+            // create Intent to take a picture and return control to the calling application
+            /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-    // start the image capture Intent
-    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-         */
+            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+            // start the image capture Intent
+            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
+        //    Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+        //} else {
+            // otherwise, open the album or whatever
+        //    Toast.makeText(getActivity(), "No camera", Toast.LENGTH_LONG).show();
+        //}
     }
 
     // when the camera intent returns
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+
+        /*if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-                Toast.makeText(getActivity(), "Image saved to:\n" +
-                        data.getData(), Toast.LENGTH_LONG).show();
 
-                 // TODO: display an alertdialog where the user can fill in an optional comment
-                 // TODO: keep track of the image + comment
+                // create an alertdialog for adding an optional comment
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
+                // add a message and a textbox
+                alert.setMessage("Give your photo an optional caption:");
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+
+                // add buttons
+                alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button, so call the save function
+                        final String title = input.getText().toString();
+
+                        // Image captured and saved to fileUri specified in the Intent
+                        Toast.makeText(getActivity(), "Image and caption saved", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        // Image captured and saved
+                        Toast.makeText(getActivity(), "Image saved", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                // Create and show the dialog
+                AlertDialog dialog = alert.create();
+                dialog.show();
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
-                // Image capture failed, advise user
+                // Image capturing failed somehow
+                Toast.makeText(getActivity(), "Image failed", Toast.LENGTH_LONG).show();
             }
         }*/
     }
