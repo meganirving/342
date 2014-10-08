@@ -40,10 +40,10 @@ public class fragSlideshow extends Fragment {
         frameBtn = (FrameLayout) root.findViewById(R.id.frameBtn);
         frameShow = (RelativeLayout) root.findViewById(R.id.frameShow);
         btnStart = (Button) root.findViewById(R.id.btnStart);
-        btnStop = (Button) root.findViewById(R.id.butStop);
+        btnStop = (Button) root.findViewById(R.id.btnStop);
         btnResume = (Button) root.findViewById(R.id.btnResume);
         comment = (TextView) root.findViewById(R.id.comment);
-        flipper = (ViewFlipper) root.findViewById(R.id.flipper);
+        flipper = (ViewFlipper) root.findViewById(R.id.flipSlide);
 
         // create duration list
         ArrayList<Integer> durations = new ArrayList<Integer>();

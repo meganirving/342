@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * Created by Megan on 29/9/2014.
  */
-public class fragJourney extends Fragment implements View.OnClickListener LocationListener {
+public class fragJourney extends Fragment implements View.OnClickListener {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -85,20 +85,25 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
 
     // called when the record button is pressed
     public void RecordButton(View v) {
-        // hide this button
-        v.setVisibility(View.GONE);
 
-        // show the other two buttons
-        btnCam.setVisibility(View.VISIBLE);
-        btnStop.setVisibility(View.VISIBLE);
+        // start collecting location data
+        actJourney activity = (actJourney) getActivity();
+        boolean tracking = activity.startTracking();
 
-        // display toast
-        Context context = getActivity().getApplicationContext();
-        CharSequence text = "Recording...";
-        int duration = Toast.LENGTH_SHORT;
-        Toast.makeText(context, text, duration).show();
+        if (tracking) {
+            // hide this button
+            v.setVisibility(View.GONE);
 
-        // TODO: start collecting GPS information to put in the journey
+            // show the other two buttons
+            btnCam.setVisibility(View.VISIBLE);
+            btnStop.setVisibility(View.VISIBLE);
+
+            // feedback
+            Toast.makeText(activity, "Recording...", Toast.LENGTH_SHORT).show();
+        } else {
+            // show error
+            Toast.makeText(activity, "Error getting location services", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // called when the camera button is pressed
@@ -192,6 +197,10 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
                     SaveJourney("Untitled Journey");
                 }
 
+                // stop tracking location
+                actJourney activity = (actJourney) getActivity();
+                activity.stopTracking();
+
             }
         });
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -227,7 +236,7 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
         mySQLHelper.createJourney(currJourney);
 
         // show toast
-        Toast.makeText(getActivity().getApplicationContext(), "Journey saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Saving...", Toast.LENGTH_SHORT).show();
     }
 
     // deals with the buttons being clicked
@@ -247,9 +256,7 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
     }
 
     // gets a new location
-    @Override
-    public void onLocationChanged(Location location) {
-
+    public void updateLocation(Location location) {
         // update the data of the point
         currPoint.setLat(location.getLatitude());
         currPoint.setLong(location.getLongitude());
@@ -257,6 +264,8 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
         // add the timestamp
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         currPoint.settimeStamp(timeStamp);
+
+        Toast.makeText(getActivity(), currPoint.getLat() + ", " + currPoint.getLong() + ": " + currPoint.gettimeStamp(), Toast.LENGTH_SHORT).show();
 
         // add it to the journey
         currJourney.addPoint(currPoint);
@@ -306,6 +315,9 @@ public class fragJourney extends Fragment implements View.OnClickListener Locati
     }
     @Override
     public void onDestroy() {
+        // if the fragment stops, stop tracking!
+        actJourney activity = (actJourney) getActivity();
+        activity.stopTracking();
         super.onDestroy();
         //mapView.onDestroy();
     }

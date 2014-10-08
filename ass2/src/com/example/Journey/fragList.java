@@ -21,10 +21,12 @@ public class fragList extends Fragment {
 
     private MySQLHelper mySql;
     private ArrayList<tblJourney> journeys;
+    private tblJourney currJourney;
     private View root;
     private ListView listframe;
     private ViewFlipper flipper;
     private journeyAdapter adapter;
+    private TextView text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +38,8 @@ public class fragList extends Fragment {
 
         // get the frames
         listframe = (ListView) root.findViewById(R.id.list);
-        //flipper = (ViewFlipper) root.findViewById(R.id.flipper);
+        text = (TextView) root.findViewById(R.id.text);
+        flipper = (ViewFlipper) root.findViewById(R.id.flipGal);
         
         // get all journeys
         journeys = mySql.getAllJourneys();
@@ -55,20 +58,20 @@ public class fragList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // view the selected journey
-                tblJourney journey = (tblJourney) parent.getItemAtPosition(position);
-                viewJourney(journey);
+                currJourney = (tblJourney) parent.getItemAtPosition(position);
+                viewJourney(currJourney);
             }
         });
 
         // set the flipper's flippy functions
-        /*flipper.setOnTouchListener(new View.OnTouchListener() {
+        flipper.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(final View view, final MotionEvent event) {
                 detector.onTouchEvent(event);
                 return true;
             }
         });
-*/
+
         return root;
     }
 
@@ -81,12 +84,14 @@ public class fragList extends Fragment {
                     flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right));
                     flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_left));
                     flipper.showNext();
+                    updateText();
                     return true;
                 } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     // left to right swipe
                     flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left));
                     flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right));
                     flipper.showPrevious();
+                    updateText();
                     return true;
                 }
 
@@ -96,9 +101,25 @@ public class fragList extends Fragment {
 
             return false;
         }
+
+        public void updateText() {
+            // get the current photo
+            int index = flipper.getDisplayedChild();
+            tblPhoto photo = currJourney.getPhotos().get(index);
+            // if this photo has a comment
+            if (!photo.getComment().isEmpty()) {
+                // add it to the comment box, make the box visible
+                text.setText(currJourney.getTitle() + ":\n" + photo.getComment());
+                text.setVisibility(View.VISIBLE);
+            } else {
+                // otherwise hide the comment box
+                text.setVisibility(View.GONE);
+            }
+        }
     }
 
     public void clearFlipper() {
+        // empty the flipper of all the views
         flipper.removeAllViews();
     }
     public void addToFlipper(tblJourney journey) {

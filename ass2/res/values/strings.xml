@@ -12,4 +12,5 @@
     <string name="lblTime">Slide Duration:</string>
     <string name="btnResume">Play</string>
     <string name="btnStop">Stop</string>
+    <string name="imgPlaceholder">placeholder</string>
 </resources>

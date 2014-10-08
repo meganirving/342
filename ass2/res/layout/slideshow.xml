@@ -90,7 +90,7 @@
         <ViewFlipper
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/flipper"
+                android:id="@+id/flipSlide"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
                 android:layout_margin="5dp"

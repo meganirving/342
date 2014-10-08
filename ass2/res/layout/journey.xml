@@ -4,7 +4,7 @@
               android:background="#ff49c8b0" android:orientation="vertical"
               android:id="@+id/linearLayout">
     <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
-                  android:layout_height="wrap_content" android:layout_weight="0.19"
+                  android:layout_height="wrap_content" android:layout_weight="0.3"
                   android:layout_margin="5dp">
         <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
                       android:layout_height="fill_parent"
@@ -33,25 +33,21 @@
                     android:singleLine="false"/>
         </LinearLayout>
     </LinearLayout>
-    <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                 android:layout_weight="0.81" android:background="#ffffffff" android:layout_marginLeft="5dp"
-                 android:layout_marginRight="5dp" android:layout_marginBottom="5dp"
-                 android:id="@+id/mapFrame">
-        <com.google.android.gms.maps.MapView android:id="@+id/mapview"
-                                             android:layout_width="fill_parent"
-                                             android:layout_height="fill_parent"
-                                             xmlns:map="http://schemas.android.com/apk/res-auto"
-                                             map:cameraBearing="112.5"
-                                             map:cameraTargetLat="-33.796923"
-                                             map:cameraTargetLng="150.922433"
-                                             map:cameraTilt="30"
-                                             map:cameraZoom="13"
-                                             map:mapType="terrain"
-                                             map:uiCompass="false"
-                                             map:uiRotateGestures="false"
-                                             map:uiScrollGestures="false"
-                                             map:uiTiltGestures="false"
-                                             map:uiZoomControls="false"
-                                             map:uiZoomGestures="false"/>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffffff"
+            android:layout_weight="0.7">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Map Placeholder"
+                android:id="@+id/textView"
+                android:layout_gravity="center"
+                android:textColor="#ff49c8b0"/>
     </FrameLayout>
+
 </LinearLayout>
