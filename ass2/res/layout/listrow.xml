@@ -31,8 +31,7 @@
             android:textSize="15dp"
             android:typeface="serif"
             android:layout_below="@+id/listTitle"
-            android:layout_margin="5dp"
-            android:paddingEnd="5dp"/>
+            android:layout_margin="5dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -44,8 +43,7 @@
             android:textColor="#ff646464"
             android:textSize="15dp"
             android:typeface="serif"
-            android:layout_margin="5dp"
-            android:paddingEnd="5dp"/>
+            android:layout_margin="5dp"/>
 
     <FrameLayout
             android:layout_width="wrap_content"

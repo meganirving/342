@@ -36,7 +36,7 @@ public class fragList extends Fragment {
 
         // get the frames
         listframe = (ListView) root.findViewById(R.id.list);
-        flipper = (ViewFlipper) root.findViewById(R.id.flipper);
+        //flipper = (ViewFlipper) root.findViewById(R.id.flipper);
         
         // get all journeys
         journeys = mySql.getAllJourneys();
@@ -61,14 +61,14 @@ public class fragList extends Fragment {
         });
 
         // set the flipper's flippy functions
-        flipper.setOnTouchListener(new View.OnTouchListener() {
+        /*flipper.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(final View view, final MotionEvent event) {
                 detector.onTouchEvent(event);
                 return true;
             }
         });
-
+*/
         return root;
     }
 
@@ -102,8 +102,8 @@ public class fragList extends Fragment {
         flipper.removeAllViews();
     }
     public void addToFlipper(tblJourney journey) {
-        // loop through points
-        for (tblPoint point : journey.getPoints()) {
+        // loop through photos
+        for (tblPhoto photo : journey.getPhotos()) {
             ImageView imageView = new ImageView(getActivity());
             // TODO: add photo to imageview
             flipper.addView(imageView);

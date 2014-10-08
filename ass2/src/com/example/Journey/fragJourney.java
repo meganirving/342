@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +30,7 @@ import java.util.Date;
 /**
  * Created by Megan on 29/9/2014.
  */
-public class fragJourney extends Fragment implements View.OnClickListener {
+public class fragJourney extends Fragment implements View.OnClickListener LocationListener {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -41,6 +42,7 @@ public class fragJourney extends Fragment implements View.OnClickListener {
 
     private tblJourney currJourney;
     private tblPoint currPoint;
+    private tblPhoto currPhoto;
     private MySQLHelper mySQLHelper;
 
     // map stuff
@@ -55,29 +57,12 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         actJourney activity = (actJourney) getActivity();
         mySQLHelper = activity.getMySql();
 
-        // create a journey and a point
+        // create a journey, point and photo
         currPoint = new tblPoint();
+        currPhoto = new tblPhoto();
         currJourney = new tblJourney();
         // set the ID of the journey to the largest ID in the database plus 1
         currJourney.setID( mySQLHelper.getLastID() +1 );
-
-        /*int statusCode = com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
-        switch (statusCode)
-        {
-            case ConnectionResult.SUCCESS:
-                Toast.makeText(this.getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
-                break;
-            case ConnectionResult.SERVICE_MISSING:
-                Toast.makeText(this.getActivity(), "SERVICE MISSING", Toast.LENGTH_SHORT).show();
-                break;
-            case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
-                Toast.makeText(this.getActivity(), "UPDATE REQUIRED", Toast.LENGTH_SHORT).show();
-                break;
-            //
-            // see http://developer.android.com/reference/com/google/android/gms/common/ConnectionResult.html for error code translation!!!
-            //
-            default: Toast.makeText(this.getActivity(), "Play Service result " + statusCode, Toast.LENGTH_SHORT).show();
-        }*/
 
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
@@ -147,12 +132,12 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 // add buttons
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button, so add the comment to the currpoint
+                        // User clicked OK button, so add the comment to the photo
                         final String comment = input.getText().toString();
-                        currPoint.setComment(comment);
+                        currPhoto.setComment(comment);
 
-                        // add the point to the journey
-                        currJourney.addPoint(currPoint);
+                        // add the photo to the journey
+                        currJourney.addPhoto(currPhoto);
 
                         // give the user an alert
                         Toast.makeText(getActivity(), "Image and caption saved!", Toast.LENGTH_SHORT).show();
@@ -162,8 +147,8 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        // add the point to the journey
-                        currJourney.addPoint(currPoint);
+                        // add the photo to the journey
+                        currJourney.addPhoto(currPhoto);
 
                         // give the user an alert
                         Toast.makeText(getActivity(), "Image saved!", Toast.LENGTH_SHORT).show();
@@ -261,27 +246,26 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         }
     }
 
+    // gets a new location
     @Override
-    public void onResume() {
-       // mapView.onResume();
-        super.onResume();
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //mapView.onDestroy();
-    }
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        //mapView.onLowMemory();
+    public void onLocationChanged(Location location) {
+
+        // update the data of the point
+        currPoint.setLat(location.getLatitude());
+        currPoint.setLong(location.getLongitude());
+
+        // add the timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        currPoint.settimeStamp(timeStamp);
+
+        // add it to the journey
+        currJourney.addPoint(currPoint);
     }
 
     /** Create a file Uri for saving an image or video */
     private Uri getOutputMediaFileUri(int type){
         return Uri.fromFile(getOutputMediaFile(type));
     }
-
     /** Create a File for saving an image or video */
     private File getOutputMediaFile(int type){
         // To be safe, you should check that the SDCard is mounted
@@ -309,9 +293,25 @@ public class fragJourney extends Fragment implements View.OnClickListener {
             return null;
         }
 
-        currPoint.settimeStamp(timeStamp);
-        currPoint.setimgURL(url);
+        currPhoto.settimeStamp(timeStamp);
+        currPhoto.setimgURL(url);
 
         return mediaFile;
+    }
+
+    @Override
+    public void onResume() {
+        // mapView.onResume();
+        super.onResume();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //mapView.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        //mapView.onLowMemory();
     }
 }

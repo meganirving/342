@@ -11,7 +11,7 @@
             android:background="#ffffffff"
             android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/frameBtn"
             android:layout_weight="0.3">
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffffff"
-            android:visibility="gone"
+            android:visibility="visible"
             android:gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="0.7"
@@ -84,7 +84,8 @@
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/frameShow">
+            android:id="@+id/frameShow"
+            android:visibility="gone">
 
         <ViewFlipper
                 android:layout_width="match_parent"
@@ -108,7 +109,6 @@
                 android:layout_alignParentBottom="false"
                 android:background="#ff646464"
                 android:alpha="0.5"
-                android:textAlignment="center"
                 android:singleLine="false"
                 android:typeface="serif"
                 android:gravity="center"

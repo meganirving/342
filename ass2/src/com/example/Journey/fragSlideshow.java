@@ -154,8 +154,8 @@ public class fragSlideshow extends Fragment {
     }
 
     public void addToFlipper(tblJourney journey) {
-        // loop through points
-        for (tblPoint point : journey.getPoints()) {
+        // loop through photos
+        for (tblPhoto photo : journey.getPhotos()) {
             ImageView imageView = new ImageView(getActivity());
             // TODO: add photo to imageview
             flipper.addView(imageView);

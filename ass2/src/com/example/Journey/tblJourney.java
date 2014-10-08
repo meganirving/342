@@ -11,18 +11,21 @@ public class tblJourney {
     private int ID;
     private String title;
     private ArrayList<tblPoint> points;
+    private ArrayList<tblPhoto> photos;
 
     // constructors
     public tblJourney() {
         ID = 0;
         title = "untitled";
         points = new ArrayList<tblPoint>();
+        photos = new ArrayList<tblPhoto>();
     }
-    public tblJourney(String title, String date, ArrayList<tblPoint> points, int ID) {
+    public tblJourney(String title, String date, ArrayList<tblPoint> points, ArrayList<tblPhoto> photos, int ID) {
         this.ID = ID;
         this.title = title;
         this.points = points;
         this.date = date;
+        this.photos = photos;
     }
 
     // getters
@@ -35,6 +38,9 @@ public class tblJourney {
     public ArrayList<tblPoint> getPoints() {
         return points;
     }
+    public ArrayList<tblPhoto> getPhotos() {
+        return photos;
+    }
     public String getDate() {
         return date;
     }
@@ -46,6 +52,9 @@ public class tblJourney {
     public void setPoints(ArrayList<tblPoint> points) {
         this.points = points;
     }
+    public void setPhotos(ArrayList<tblPhoto> photos) {
+        this.photos = photos;
+    }
     public void setTitle(String title)  {
         this.title = title;
     }
@@ -56,5 +65,9 @@ public class tblJourney {
     // add new point
     public void addPoint(tblPoint newPoint) {
         points.add(newPoint);
+    }
+    // add new photo
+    public void addPhoto(tblPhoto newPhoto) {
+        photos.add(newPhoto);
     }
 }

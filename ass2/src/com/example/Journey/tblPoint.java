@@ -10,58 +10,42 @@ import java.util.Timer;
 public class tblPoint {
 
     private String timeStamp;
-    private long Lat;
-    private long Long;
-    private String imgURL;
-    private String comment;
+    private double Lat;
+    private double Long;
 
     // constructors
     public tblPoint() {
         Lat = 0;
         Long = 0;
-        imgURL = "default";
-        comment = "default";
         timeStamp = "";
     }
-    public tblPoint(String timeStamp, long Lat, long Long)  {
+    public tblPoint(String timeStamp, double Lat, double Long)  {
         this.timeStamp = timeStamp;
         this.Lat = Lat;
         this.Long = Long;
-        this.imgURL = "default";
-        this.comment = "default";
     }
 
     // getters
     public String gettimeStamp() {
         return timeStamp;
     }
-    public long getLat() {
+    public double getLat() {
         return Lat;
     }
-    public long getLong() {
+    public double getLong() {
         return Long;
     }
-    public String getimgURL() {
-        return imgURL;
-    }
-    public String getComment() {
-        return comment;
-    }
+
 
     // setters
     public void settimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
-    public void setLat(long Lat) {
+    public void setLat(double Lat) {
         this.Lat = Lat;
     }
-    public void setLong(long Long) {
+    public void setLong(double Long) {
         this.Long = Long;
     }
-    public void setimgURL(String imgURL) {
-        this.imgURL = imgURL;
-    }
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+
 }

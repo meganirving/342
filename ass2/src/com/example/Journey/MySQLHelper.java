@@ -19,9 +19,15 @@ public class MySQLHelper extends SQLiteOpenHelper {
 
     // points
     public static final String TABLE_POINTS = "points";
-    public static final String COLUMN_TIME = "p_time";
-    public static final String COLUMN_COMMENT = "p_comment";
-    public static final String COLUMN_URL = "p_url";
+    public static final String COLUMN_PTIME = "p_time";
+    public static final String COLUMN_PLAT = "p_lat";
+    public static final String COLUMN_PLONG = "p_long";
+
+    // photos
+    public static final String TABLE_PHOTOS = "photos";
+    public static final String COLUMN_PHTIME = "ph_time";
+    public static final String COLUMN_COMMENT = "ph_comment";
+    public static final String COLUMN_URL = "ph_url";
 
     // journeys
     public static final String TABLE_JOURNEYS = "journeys";
@@ -29,18 +35,24 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TITlE = "j_title";
     public static final String COLUMN_DATE = "j_date";
 
-    // relationship
-    public static final String TABLE_REL = "JOURNEY_POINTS";
-    public static final String COLUMN_RID = "r__id";
+    // journey/point relationship
+    public static final String TABLE_JPREL = "JOURNEY_POINTS";
+    public static final String COLUMN_JPRID = "jpr_id";
+
+    // journey/photo relationship
+    public static final String TABLE_JPHREL = "JOURNEY_PHOTOS";
+    public static final String COLUMN_JPHRID = "jphr_id";
 
     // all columns
     private String[] allJColumns = {MySQLHelper.COLUMN_JID, MySQLHelper.COLUMN_TITlE, MySQLHelper.COLUMN_DATE};
-    private String[] allPColumns = {MySQLHelper.COLUMN_URL, MySQLHelper.COLUMN_TIME, MySQLHelper.COLUMN_COMMENT};
-    private String[] allRColumns = {MySQLHelper.COLUMN_RID, MySQLHelper.COLUMN_URL, MySQLHelper.COLUMN_JID};
+    private String[] allPColumns = {MySQLHelper.COLUMN_PTIME, MySQLHelper.COLUMN_PLAT, MySQLHelper.COLUMN_PLONG};
+    private String[] allJPRColumns = {MySQLHelper.COLUMN_JPRID, MySQLHelper.COLUMN_PTIME, MySQLHelper.COLUMN_JID};
+    private String[] allJPHRColumns = {MySQLHelper.COLUMN_JPHRID, MySQLHelper.COLUMN_URL, MySQLHelper.COLUMN_JID};
+    private String[] allPHColumns = {MySQLHelper.COLUMN_PHTIME, MySQLHelper.COLUMN_COMMENT, MySQLHelper.COLUMN_URL};
 
     // database stuff
     private static final String DATABASE_NAME = "journeys.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
     private SQLiteDatabase database;
 
     // create tables
@@ -48,11 +60,16 @@ public class MySQLHelper extends SQLiteOpenHelper {
             + "(" + COLUMN_JID + " integer primary key, " + COLUMN_TITlE + " text not null, "
             + COLUMN_DATE + " text not null);";
     private static final String CREATE_TABLE_POINT = "create table " + TABLE_POINTS
-            + "(" + COLUMN_URL + " text primary key, " + COLUMN_COMMENT + " text, "
-            + COLUMN_TIME + " text not null)";
-    private static final String CREATE_TABLE_REL = "create table " + MySQLHelper.TABLE_REL
-            + "(" + COLUMN_RID + " integer primary key autoincrement, " + COLUMN_URL + " text, "
+            + "(" + COLUMN_PTIME + " text primary key, " + COLUMN_PLAT + " real, " + COLUMN_PLONG + " real)";
+    private static final String CREATE_TABLE_JPREL = "create table " + MySQLHelper.TABLE_JPREL
+            + "(" + COLUMN_JPRID + " integer primary key autoincrement, " + COLUMN_PTIME + " text, "
             + COLUMN_JID + " integer)";
+    private static final String CREATE_TABLE_JPHREL = "create table " + MySQLHelper.TABLE_JPHREL
+            + "(" + COLUMN_JPHRID + " integer primary key autoincrement, " + COLUMN_URL + " text, "
+            + COLUMN_JID + " integer)";
+    private static final String CREATE_TABLE_PHOTO = "create table " + TABLE_PHOTOS
+            + "(" + COLUMN_URL + " text primary key, " + COLUMN_COMMENT + " text, "
+            + COLUMN_PTIME + " text not null)";
 
     // constructor
     public MySQLHelper(Context context) {
@@ -64,7 +81,9 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_JOURNEY);
         db.execSQL(CREATE_TABLE_POINT);
-        db.execSQL(CREATE_TABLE_REL);
+        db.execSQL(CREATE_TABLE_PHOTO);
+        db.execSQL(CREATE_TABLE_JPREL);
+        db.execSQL(CREATE_TABLE_JPHREL);
     }
 
     // opening and closing
@@ -83,7 +102,9 @@ public class MySQLHelper extends SQLiteOpenHelper {
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNEYS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PHOTOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JPREL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JPHREL);
         onCreate(db);
     }
 
@@ -97,12 +118,17 @@ public class MySQLHelper extends SQLiteOpenHelper {
     }
     private tblPoint cursorToPoint(Cursor cursor) {
         tblPoint point = new tblPoint();
-        point.setimgURL(cursor.getString(0));
-        point.setComment(cursor.getString(1));
-        point.settimeStamp(cursor.getString(2));
-        //point.setLat(cursor.getLong(1));
-        //point.setLong(cursor.getLong(2));
+        point.settimeStamp(cursor.getString(0));
+        point.setLat(cursor.getDouble(1));
+        point.setLong(cursor.getDouble(2));
         return point;
+    }
+    private tblPhoto cursorToPhoto(Cursor cursor) {
+        tblPhoto photo = new tblPhoto();
+        photo.setimgURL(cursor.getString(0));
+        photo.setComment(cursor.getString(1));
+        photo.settimeStamp(cursor.getString(2));
+        return photo;
     }
 
     // add things to the tables
@@ -115,7 +141,13 @@ public class MySQLHelper extends SQLiteOpenHelper {
         for (tblPoint point : journey.getPoints()) {
             // add each point and the relationship between it + the journey to the database
             createPoint(point);
-            createRelationship(journey, point);
+            createJPRel(journey, point);
+        }
+        // go through all the photos in the journey
+        for (tblPhoto photo : journey.getPhotos()) {
+            // add each photo and also the relationship
+            createPhoto(photo);
+            createJPHRel(journey, photo);
         }
 
         // add the journey
@@ -123,16 +155,29 @@ public class MySQLHelper extends SQLiteOpenHelper {
     }
     public void createPoint(tblPoint point) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_URL, point.getimgURL());
-        values.put(COLUMN_COMMENT, point.getComment());
-        values.put(COLUMN_TIME, point.gettimeStamp());
+        values.put(COLUMN_PTIME, point.gettimeStamp());
+        values.put(COLUMN_PLAT, point.getLat());
+        values.put(COLUMN_PLONG, point.getLong());
         database.insert(TABLE_POINTS, null, values);
     }
-    public void createRelationship(tblJourney journey, tblPoint point) {
+    public void createPhoto(tblPhoto photo) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_URL, photo.getimgURL());
+        values.put(COLUMN_COMMENT, photo.getComment());
+        values.put(COLUMN_PHTIME, photo.gettimeStamp());
+        database.insert(TABLE_PHOTOS, null, values);
+    }
+    public void createJPRel(tblJourney journey, tblPoint point) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_JID, journey.getID());
-        values.put(COLUMN_URL, point.getimgURL());
-        database.insert(TABLE_REL, null, values);
+        values.put(COLUMN_PTIME, point.gettimeStamp());
+        database.insert(TABLE_JPREL, null, values);
+    }
+    public void createJPHRel(tblJourney journey, tblPhoto photo) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_JID, journey.getID());
+        values.put(COLUMN_URL, photo.getimgURL());
+        database.insert(TABLE_JPHREL, null, values);
     }
 
     // gets journey/s from the table
@@ -152,8 +197,9 @@ public class MySQLHelper extends SQLiteOpenHelper {
         journey.setTitle(c.getString(c.getColumnIndex(COLUMN_TITlE)));
         journey.setDate(c.getString(c.getColumnIndex(COLUMN_DATE)));
 
-        // get all the points
+        // get all the points and photos
         journey.setPoints(getAllPoints(journey.getID()));
+        journey.setPhotos(getAllPhotos(journey.getID()));
 
         return journey;
     }
@@ -167,9 +213,10 @@ public class MySQLHelper extends SQLiteOpenHelper {
         // loop through
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            // create a journey and its points, add it to the list
+            // create a journey and its points and photos, add it to the list
             tblJourney newJourney = cursorToJourney(cursor);
             newJourney.setPoints(getAllPoints(newJourney.getID()));
+            newJourney.setPhotos(getAllPhotos(newJourney.getID()));
             journeys.add(newJourney);
             cursor.moveToNext();
         }
@@ -177,67 +224,75 @@ public class MySQLHelper extends SQLiteOpenHelper {
         cursor.close();
         return journeys;
     }
-
-    // get point/s from the table
-    public tblPoint getPoint(String url){
-        // make the query
-        String selectQuery = "SELECT  * FROM " + TABLE_POINTS + " WHERE "
-                + COLUMN_URL + " = " + url;
-
-        // get the cursor
-        Cursor c = database.rawQuery(selectQuery, null);
-        if (c != null)
-            c.moveToFirst();
-
-        // get journey
-        tblPoint point = new tblPoint();
-        point.setimgURL(c.getString(c.getColumnIndex(COLUMN_URL)));
-        point.setComment(c.getString(c.getColumnIndex(COLUMN_COMMENT)));
-        point.settimeStamp(c.getString(c.getColumnIndex(COLUMN_TIME)));
-        return point;
-    }
     // get all the points for an appropriate journey
     public ArrayList<tblPoint> getAllPoints(int ID) {
-
-        // create query
-        String selectQuery = "select * from " + TABLE_POINTS + " tp, " + TABLE_REL + " tr where tr." + COLUMN_JID + " = " + ID;
+        // create query and get results
+        String selectQuery = "select * from " + TABLE_POINTS + " tp, " + TABLE_JPREL + " tr where tr." + COLUMN_JID + " = " + ID;
+        Cursor cursor = database.rawQuery(selectQuery, null);
 
         // create the point array
         ArrayList<tblPoint> points = new ArrayList<tblPoint>();
 
-        // get the cursor from the query
-        Cursor cursor = database.query(MySQLHelper.TABLE_JOURNEYS,
-                allJColumns, null, null, null, null, null);
-
         // loop through and add points to the list
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            // create a point and add it to the list
-            tblPoint newPoint = cursorToPoint(cursor);
-            points.add(newPoint);
-            cursor.moveToNext();
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                // create a point and add it to the list
+                tblPoint newPoint = cursorToPoint(cursor);
+                points.add(newPoint);
+                cursor.moveToNext();
+            }
         }
 
         // close the cursor and return the list
         cursor.close();
         return points;
     }
+    // get all the photos from a journey
+    public ArrayList<tblPhoto> getAllPhotos(int ID) {
+        // create query
+        String selectQuery = "select * from " + TABLE_PHOTOS + " tp, " + TABLE_JPHREL + " tr where tr." + COLUMN_JID + " = " + ID;
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        // create the point array
+        ArrayList<tblPhoto> photos = new ArrayList<tblPhoto>();
+
+        // loop through and add points to the list
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            // create a point and add it to the list
+            tblPhoto newPhoto = cursorToPhoto(cursor);
+            photos.add(newPhoto);
+            cursor.moveToNext();
+        }
+
+        // close the cursor and return the list
+        cursor.close();
+        return photos;
+    }
 
     // delete elements from tables
     public void deleteJourney(tblJourney journey) {
-        // delete all the points and relationship first
+        // delete all the points, phtoos and relationship first
         for (tblPoint point : journey.getPoints()) {
-            deletePoint(point.getimgURL());
-            deleteRelationship(journey);
+            deletePoint(point.gettimeStamp());
         }
+        for (tblPhoto photo : journey.getPhotos()) {
+            deletePhoto(photo.getimgURL());
+        }
+        deleteRelationships(journey);
+
         // then delete the journey
         database.delete(MySQLHelper.TABLE_JOURNEYS, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);
     }
-    public void deletePoint(String URL) {
-        database.delete(MySQLHelper.TABLE_POINTS, MySQLHelper.COLUMN_URL + " = " + URL, null);
+    public void deletePoint(String Time) {
+        database.delete(MySQLHelper.TABLE_POINTS, MySQLHelper.COLUMN_PTIME + " = " + Time, null);
     }
-    public void deleteRelationship(tblJourney journey) {
-        database.delete(MySQLHelper.TABLE_REL, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);
+    public void deletePhoto(String URL) {
+        database.delete(MySQLHelper.TABLE_PHOTOS, MySQLHelper.COLUMN_URL + " = " + URL, null);
+    }
+    public void deleteRelationships(tblJourney journey) {
+        database.delete(MySQLHelper.TABLE_JPREL, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);
+        database.delete(MySQLHelper.TABLE_JPHREL, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);
     }
 
     // get biggest journey ID
