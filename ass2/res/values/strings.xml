@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Journey</string>
     <string name="butStop">Stop Recording</string>
-    <string name="butRecord">Record</string>
+    <string name="butRecord">Start Recording</string>
     <string name="butCamera">Take Photo</string>
     <string name="listTitle">Title</string>
     <string name="listDate">Date</string>
@@ -12,5 +12,5 @@
     <string name="lblTime">Slide Duration:</string>
     <string name="btnResume">Play</string>
     <string name="btnStop">Stop</string>
-    <string name="imgPlaceholder">placeholder</string>
+    <string name="imgPlaceholder">Placeholder</string>
 </resources>

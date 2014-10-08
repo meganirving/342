@@ -54,6 +54,13 @@ public class actJourney extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        // check google play services
+        if (servicesConnected()) {
+            Log.v("journey", "yep");
+        } else {
+            Log.v("journey", "nope");
+        }
+
         // Create the LocationRequest object
         mLocationRequest = LocationRequest.create();
         // Use high accuracy
@@ -194,12 +201,7 @@ public class actJourney extends Activity implements
                 e.printStackTrace();
             }
         } else {
-            /*
-             * If no resolution is available, display a dialog to the
-             * user with the error.
-             */
             Log.v("journey", "help");
-            //Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
         }
     }
     // Define a DialogFragment that displays the error dialog

@@ -1,12 +1,14 @@
 package com.example.Journey;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.*;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,9 +127,15 @@ public class fragList extends Fragment {
     public void addToFlipper(tblJourney journey) {
         // loop through photos
         for (tblPhoto photo : journey.getPhotos()) {
-            ImageView imageView = new ImageView(getActivity());
-            // TODO: add photo to imageview
-            flipper.addView(imageView);
+            // get the image file
+            File imgFile = new  File(photo.getimgURL());
+            if(imgFile.exists())
+            {
+                // create the imageview and add it to the flipper
+                ImageView imageView = new ImageView(getActivity());
+                imageView.setImageURI(Uri.fromFile(imgFile));
+                flipper.addView(imageView);
+            }
         }
     }
 

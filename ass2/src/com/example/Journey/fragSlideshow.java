@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -156,9 +157,15 @@ public class fragSlideshow extends Fragment {
     public void addToFlipper(tblJourney journey) {
         // loop through photos
         for (tblPhoto photo : journey.getPhotos()) {
-            ImageView imageView = new ImageView(getActivity());
-            // TODO: add photo to imageview
-            flipper.addView(imageView);
+            // get the image file
+            File imgFile = new  File(photo.getimgURL());
+            if(imgFile.exists())
+            {
+                // create the imageview and add it to the flipper
+                ImageView imageView = new ImageView(getActivity());
+                imageView.setImageURI(Uri.fromFile(imgFile));
+                flipper.addView(imageView);
+            }
         }
     }
     public void clearFlipper() {
