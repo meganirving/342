@@ -10,27 +10,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/flipGal"
-            android:visibility="gone"
-            android:background="#ffffffff"
-            android:clickable="false"
-            android:focusable="false"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:background="#ffc2c2c2"
+            android:visibility="visible"
+            android:layout_margin="5dp"/>
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/text"
+            android:id="@+id/flipText"
             android:layout_gravity="center_horizontal|bottom"
             android:textColor="#ffffffff"
             android:background="#ff646464"
             android:alpha="0.5"
             android:typeface="serif"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentBottom="false"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:layout_margin="5dp"
+            android:visibility="gone"
             android:gravity="center_horizontal"
-            android:visibility="gone"/>
+            android:layout_centerVertical="true"/>
 
     <ListView
             android:layout_width="match_parent"
@@ -38,4 +41,30 @@
             android:id="@+id/list" android:fastScrollAlwaysVisible="false" android:layout_margin="5dp"
             android:background="#ffffffff"
             android:visibility="visible"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#ffffffff">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnBack"
+                android:id="@+id/btnBack"
+                android:background="#ff49c8b0"
+                android:textColor="#ffffffff"
+                android:typeface="serif"
+                android:layout_margin="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:textSize="20dp"
+                android:singleLine="false"
+                android:visibility="gone"/>
+    </LinearLayout>
+
 </RelativeLayout>

@@ -94,7 +94,7 @@
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
                 android:layout_margin="5dp"
-                android:background="#ffff9f47"
+                android:background="#ffe5e5e5"
                 android:clickable="false">
 
         </ViewFlipper>
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Example Comment"
+                android:text="No Photo"
                 android:id="@+id/comment"
                 android:visibility="visible"
                 android:layout_alignParentBottom="false"
@@ -114,36 +114,58 @@
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"/>
 
-        <Button
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnStop"
-                android:id="@+id/btnStop"
-                android:background="#ff49c8b0"
-                android:textColor="#ffffffff"
-                android:typeface="serif"
-                android:padding="10dp"
-                android:layout_margin="5dp"
+                android:background="#ffffffff"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:textSize="20dp"/>
+                android:layout_margin="5dp">
 
-        <Button
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnStop"
+                    android:id="@+id/btnStop"
+                    android:background="#ff49c8b0"
+                    android:textColor="#ffffffff"
+                    android:typeface="serif"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="20dp"
+                    android:layout_alignParentTop="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnResume"
-                android:background="#ff49c8b0"
-                android:textColor="#ffffffff"
-                android:typeface="serif"
-                android:padding="10dp"
                 android:layout_margin="5dp"
-                android:layout_alignParentLeft="false"
                 android:layout_alignParentBottom="true"
-                android:textSize="20dp"
                 android:layout_alignParentRight="true"
-                android:id="@+id/btnResume"/>
+                android:background="#ffffffff">
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnResume"
+                    android:background="#ff49c8b0"
+                    android:textColor="#ffffffff"
+                    android:typeface="serif"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="20dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/btnResume"
+                    android:layout_alignParentTop="false"
+                    android:layout_gravity="bottom|right"/>
+        </LinearLayout>
 
     </RelativeLayout>
 

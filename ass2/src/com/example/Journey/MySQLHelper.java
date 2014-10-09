@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
@@ -19,12 +20,15 @@ public class MySQLHelper extends SQLiteOpenHelper {
 
     // points
     public static final String TABLE_POINTS = "points";
+    public static final String COLUMN_PCOMP = "p_comp";
+    public static final String COLUMN_PID = "p_id";
     public static final String COLUMN_PTIME = "p_time";
     public static final String COLUMN_PLAT = "p_lat";
     public static final String COLUMN_PLONG = "p_long";
 
     // photos
     public static final String TABLE_PHOTOS = "photos";
+    public static final String COLUMN_PHID = "ph_id";
     public static final String COLUMN_PHTIME = "ph_time";
     public static final String COLUMN_COMMENT = "ph_comment";
     public static final String COLUMN_URL = "ph_url";
@@ -45,14 +49,14 @@ public class MySQLHelper extends SQLiteOpenHelper {
 
     // all columns
     private String[] allJColumns = {MySQLHelper.COLUMN_JID, MySQLHelper.COLUMN_TITlE, MySQLHelper.COLUMN_DATE};
-    private String[] allPColumns = {MySQLHelper.COLUMN_PTIME, MySQLHelper.COLUMN_PLAT, MySQLHelper.COLUMN_PLONG};
+    private String[] allPColumns = {MySQLHelper.COLUMN_PCOMP, MySQLHelper.COLUMN_PTIME, MySQLHelper.COLUMN_PID, MySQLHelper.COLUMN_PLAT, MySQLHelper.COLUMN_PLONG};
     private String[] allJPRColumns = {MySQLHelper.COLUMN_JPRID, MySQLHelper.COLUMN_PTIME, MySQLHelper.COLUMN_JID};
     private String[] allJPHRColumns = {MySQLHelper.COLUMN_JPHRID, MySQLHelper.COLUMN_URL, MySQLHelper.COLUMN_JID};
-    private String[] allPHColumns = {MySQLHelper.COLUMN_PHTIME, MySQLHelper.COLUMN_COMMENT, MySQLHelper.COLUMN_URL};
+    private String[] allPHColumns = {MySQLHelper.COLUMN_URL, MySQLHelper.COLUMN_PHID, MySQLHelper.COLUMN_PHTIME, MySQLHelper.COLUMN_COMMENT};
 
     // database stuff
     private static final String DATABASE_NAME = "journeys.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 22;
     private SQLiteDatabase database;
 
     // create tables
@@ -60,16 +64,17 @@ public class MySQLHelper extends SQLiteOpenHelper {
             + "(" + COLUMN_JID + " integer primary key, " + COLUMN_TITlE + " text not null, "
             + COLUMN_DATE + " text not null);";
     private static final String CREATE_TABLE_POINT = "create table " + TABLE_POINTS
-            + "(" + COLUMN_PTIME + " text primary key, " + COLUMN_PLAT + " real, " + COLUMN_PLONG + " real)";
+            + "(" + COLUMN_PCOMP + " text primary key, " + COLUMN_PTIME + " text, " + COLUMN_PID + " integer, "
+            + COLUMN_PLAT + " real, " + COLUMN_PLONG + " real)";
     private static final String CREATE_TABLE_JPREL = "create table " + MySQLHelper.TABLE_JPREL
             + "(" + COLUMN_JPRID + " integer primary key autoincrement, " + COLUMN_PTIME + " text, "
             + COLUMN_JID + " integer)";
     private static final String CREATE_TABLE_JPHREL = "create table " + MySQLHelper.TABLE_JPHREL
-            + "(" + COLUMN_JPHRID + " integer primary key autoincrement, " + COLUMN_URL + " text, "
+            + "(" + COLUMN_JPHRID + " integer primary key autoincrement, " + COLUMN_PHID + " integer, "
             + COLUMN_JID + " integer)";
     private static final String CREATE_TABLE_PHOTO = "create table " + TABLE_PHOTOS
-            + "(" + COLUMN_URL + " text primary key, " + COLUMN_COMMENT + " text, "
-            + COLUMN_PTIME + " text not null)";
+            + "(" + COLUMN_URL + " text primary key, " + COLUMN_PHID + " integer, " + COLUMN_COMMENT + " text, "
+            + COLUMN_PHTIME + " text not null)";
 
     // constructor
     public MySQLHelper(Context context) {
@@ -91,8 +96,14 @@ public class MySQLHelper extends SQLiteOpenHelper {
         database = this.getWritableDatabase();
     }
     public void closeDB() {
+        Log.v("journey", "closed");
         if (database != null && database.isOpen())
             database.close();
+    }
+    // calls the open function if the database is closed
+    public void checkOpen() {
+        if (!database.isOpen())
+            open();
     }
 
     @Override
@@ -118,16 +129,19 @@ public class MySQLHelper extends SQLiteOpenHelper {
     }
     private tblPoint cursorToPoint(Cursor cursor) {
         tblPoint point = new tblPoint();
-        point.settimeStamp(cursor.getString(0));
-        point.setLat(cursor.getDouble(1));
-        point.setLong(cursor.getDouble(2));
+        point.setComposite(cursor.getString(0));
+        point.settimeStamp(cursor.getString(1));
+        point.setID(cursor.getInt(2));
+        point.setLat(cursor.getDouble(3));
+        point.setLong(cursor.getDouble(4));
         return point;
     }
     private tblPhoto cursorToPhoto(Cursor cursor) {
         tblPhoto photo = new tblPhoto();
         photo.setimgURL(cursor.getString(0));
-        photo.setComment(cursor.getString(1));
-        photo.settimeStamp(cursor.getString(2));
+        photo.setID(cursor.getInt(1));
+        photo.setComment(cursor.getString(2));
+        photo.settimeStamp(cursor.getString(3));
         return photo;
     }
 
@@ -149,13 +163,14 @@ public class MySQLHelper extends SQLiteOpenHelper {
             createPhoto(photo);
             createJPHRel(journey, photo);
         }
-
         // add the journey
         database.insert(TABLE_JOURNEYS, null, values);
     }
     public void createPoint(tblPoint point) {
         ContentValues values = new ContentValues();
+        values.put(COLUMN_PCOMP, point.getComposite());
         values.put(COLUMN_PTIME, point.gettimeStamp());
+        values.put(COLUMN_PID, point.getID());
         values.put(COLUMN_PLAT, point.getLat());
         values.put(COLUMN_PLONG, point.getLong());
         database.insert(TABLE_POINTS, null, values);
@@ -163,6 +178,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public void createPhoto(tblPhoto photo) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_URL, photo.getimgURL());
+        values.put(COLUMN_PHID, photo.getID());
         values.put(COLUMN_COMMENT, photo.getComment());
         values.put(COLUMN_PHTIME, photo.gettimeStamp());
         database.insert(TABLE_PHOTOS, null, values);
@@ -176,7 +192,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public void createJPHRel(tblJourney journey, tblPhoto photo) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_JID, journey.getID());
-        values.put(COLUMN_URL, photo.getimgURL());
+        values.put(COLUMN_PHID, photo.getID());
         database.insert(TABLE_JPHREL, null, values);
     }
 
@@ -285,10 +301,10 @@ public class MySQLHelper extends SQLiteOpenHelper {
         database.delete(MySQLHelper.TABLE_JOURNEYS, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);
     }
     public void deletePoint(String Time) {
-        database.delete(MySQLHelper.TABLE_POINTS, MySQLHelper.COLUMN_PTIME + " = " + Time, null);
+        database.delete(MySQLHelper.TABLE_POINTS, MySQLHelper.COLUMN_PTIME + " = '" + Time + "'", null);
     }
     public void deletePhoto(String URL) {
-        database.delete(MySQLHelper.TABLE_PHOTOS, MySQLHelper.COLUMN_URL + " = " + URL, null);
+        database.delete(MySQLHelper.TABLE_PHOTOS, MySQLHelper.COLUMN_URL + " = '" + URL + "'", null);
     }
     public void deleteRelationships(tblJourney journey) {
         database.delete(MySQLHelper.TABLE_JPREL, MySQLHelper.COLUMN_JID + " = " + journey.getID(), null);

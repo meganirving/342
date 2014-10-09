@@ -42,6 +42,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp">
+        <com.google.android.gms.maps.MapView android:id="@+id/mapview"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent" />
 
         <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +53,10 @@
                 android:text="Map Placeholder"
                 android:id="@+id/textView"
                 android:layout_gravity="center"
-                android:textColor="#ff49c8b0"/>
+                android:textColor="#ff49c8b0"
+                android:typeface="serif"
+                android:textSize="50dp"
+                android:gravity="center_horizontal"/>
     </FrameLayout>
 
 </LinearLayout>

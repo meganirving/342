@@ -41,9 +41,16 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     private Button btnStop;
 
     private tblJourney currJourney;
-    private tblPoint currPoint;
-    private tblPhoto currPhoto;
+    private double latitude;
+    private double longitude;
+    private String comment;
+    private String URL;
+    private String timestamp;
     private MySQLHelper mySQLHelper;
+    private boolean cam;
+    private int journID;
+    private int pointID;
+    private int picID;
 
     // map stuff
     private GoogleMap map;
@@ -53,16 +60,16 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.journey, container, false);
 
-        // get sqlhelper from the activity
+        // get sqlhelper from the activity and camera status
         actJourney activity = (actJourney) getActivity();
         mySQLHelper = activity.getMySql();
+        cam = activity.isCamera();
 
         // create a journey, point and photo
-        currPoint = new tblPoint();
-        currPhoto = new tblPhoto();
         currJourney = new tblJourney();
         // set the ID of the journey to the largest ID in the database plus 1
-        currJourney.setID( mySQLHelper.getLastID() +1 );
+        journID = mySQLHelper.getLastID() + 1;
+        currJourney.setID(journID);
 
         btnRec = (Button) root.findViewById(R.id.butRecord);
         btnRec.setOnClickListener(this);
@@ -71,14 +78,16 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnStop = (Button) root.findViewById(R.id.butStop);
         btnStop.setOnClickListener(this);
 
-        // create map
+        // TODO: create mapview. This code doesn't run on my emulator, and creates a million errors on my phone
         /*mapView = (MapView) root.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         map = mapView.getMap();
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.setMyLocationEnabled(true);
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        MapsInitializer.initialize(this.getActivity());*/
+        MapsInitializer.initialize(this.getActivity());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+        map.animateCamera(cameraUpdate);*/
 
         return root;
     }
@@ -89,7 +98,6 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         // start collecting location data
         actJourney activity = (actJourney) getActivity();
         boolean tracking = activity.startTracking();
-
         if (tracking) {
             // hide this button
             v.setVisibility(View.GONE);
@@ -109,23 +117,26 @@ public class fragJourney extends Fragment implements View.OnClickListener {
     // called when the camera button is pressed
     public void CameraButton(View v) {
 
-        // create Intent to take a picture and return control to the calling application
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // if the phone has a camear
+        if (cam) {
+            // create Intent to take a picture and return control to the calling application
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
-        // start the image capture Intent
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            // start the image capture Intent
+            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        } else {
+            // TODO: open gallery folder to pick images
+        }
     }
 
     // when the camera intent returns
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == getActivity().RESULT_OK) {
-
                 // create an alertdialog for adding an optional comment
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -137,12 +148,11 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 // add buttons
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button, so add the comment to the photo
-                        final String comment = input.getText().toString();
-                        currPhoto.setComment(comment);
-
+                        // User clicked OK button, so get the comment
+                        comment = input.getText().toString();
                         // add the photo to the journey
-                        currJourney.addPhoto(currPhoto);
+                        String date = new SimpleDateFormat("EEE, MMM d, yyyy HH:mm:ss").format(new Date());
+                        currJourney.addPhoto(new tblPhoto(date, comment, URL, picID));
 
                         // give the user an alert
                         Toast.makeText(getActivity(), "Image and caption saved!", Toast.LENGTH_SHORT).show();
@@ -153,11 +163,11 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int id) {
 
                         // add the photo to the journey
-                        currJourney.addPhoto(currPhoto);
+                        String date = new SimpleDateFormat("EEE, MMM d, yyyy HH:mm:ss").format(new Date());
+                        currJourney.addPhoto(new tblPhoto(date, "", URL, picID));
 
                         // give the user an alert
                         Toast.makeText(getActivity(), "Image saved!", Toast.LENGTH_SHORT).show();
-
                     }
                 });
 
@@ -224,15 +234,14 @@ public class fragJourney extends Fragment implements View.OnClickListener {
         btnRec.setVisibility(View.VISIBLE);
 
         // add the date to the journey
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = df.format(c.getTime());
-        currJourney.setDate(formattedDate);
+        String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        currJourney.setDate(date);
 
         // add the title to the journey
         currJourney.setTitle(title);
 
         // save the journey to the database
+        mySQLHelper.checkOpen();
         mySQLHelper.createJourney(currJourney);
 
         // show toast
@@ -257,18 +266,18 @@ public class fragJourney extends Fragment implements View.OnClickListener {
 
     // gets a new location
     public void updateLocation(Location location) {
-        // update the data of the point
-        currPoint.setLat(location.getLatitude());
-        currPoint.setLong(location.getLongitude());
+        // get location data
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
-        // add the timestamp
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        currPoint.settimeStamp(timeStamp);
-
-        Toast.makeText(getActivity(), currPoint.getLat() + ", " + currPoint.getLong() + ": " + currPoint.gettimeStamp(), Toast.LENGTH_SHORT).show();
+        // get the timestamp
+        timestamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        Toast.makeText(getActivity(), "changed", Toast.LENGTH_SHORT);
 
         // add it to the journey
-        currJourney.addPoint(currPoint);
+        pointID = currJourney.nextPointID();
+        String comp = pointID + "_" + timestamp;
+        currJourney.addPoint(new tblPoint(timestamp, latitude, longitude, pointID, comp));
     }
 
     /** Create a file Uri for saving an image or video */
@@ -292,19 +301,21 @@ public class fragJourney extends Fragment implements View.OnClickListener {
                 return null;
             }
         }
+        // get a timestamp
+        String ts = new SimpleDateFormat("HH:mm:ss").format(new Date());
+
         // Create a url
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        String url = mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg";
+        picID = currJourney.nextPhotoID();
+        journID = currJourney.getID();
+        URL = mediaStorageDir.getPath() + File.separator + "IMG_" + journID + picID + "_" + ts + ".jpg";
         if (type == MEDIA_TYPE_IMAGE){
-            mediaFile = new File(url);
+            mediaFile = new File(URL);
         } else {
             return null;
         }
 
-        currPhoto.settimeStamp(timeStamp);
-        currPhoto.setimgURL(url);
-
+        // return the file
         return mediaFile;
     }
 

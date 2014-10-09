@@ -29,6 +29,7 @@ public class fragList extends Fragment {
     private ViewFlipper flipper;
     private journeyAdapter adapter;
     private TextView text;
+    private Button back;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,10 +41,12 @@ public class fragList extends Fragment {
 
         // get the frames
         listframe = (ListView) root.findViewById(R.id.list);
-        text = (TextView) root.findViewById(R.id.text);
+        text = (TextView) root.findViewById(R.id.flipText);
         flipper = (ViewFlipper) root.findViewById(R.id.flipGal);
+        back = (Button) root.findViewById(R.id.btnBack);
         
         // get all journeys
+        mySql.checkOpen();
         journeys = mySql.getAllJourneys();
 
         // create the adapter
@@ -60,6 +63,7 @@ public class fragList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // view the selected journey
+                // TODO: this selects the wrong journey, somehow?
                 currJourney = (tblJourney) parent.getItemAtPosition(position);
                 viewJourney(currJourney);
             }
@@ -74,50 +78,70 @@ public class fragList extends Fragment {
             }
         });
 
+        // set the back button
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // clear the flipper and reset the views
+                clearFlipper();
+                flipper.setVisibility(View.GONE);
+                back.setVisibility(View.GONE);
+                text.setVisibility(View.GONE);
+                listframe.setVisibility(View.VISIBLE);
+            }
+        });
+
         return root;
     }
 
     class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            try {
-                // right to left swipe
-                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right));
-                    flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_left));
-                    flipper.showNext();
-                    updateText();
-                    return true;
-                } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    // left to right swipe
-                    flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left));
-                    flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right));
-                    flipper.showPrevious();
-                    updateText();
-                    return true;
-                }
+            // check if there are any photos at all
+            if (flipper.getChildCount() != 0) {
+                try {
+                    // right to left swipe
+                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right));
+                        flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_left));
+                        flipper.showNext();
+                        updateText();
+                        return true;
+                    } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        // left to right swipe
+                        flipper.setInAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left));
+                        flipper.setOutAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right));
+                        flipper.showPrevious();
+                        updateText();
+                        return true;
+                    }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             return false;
         }
 
-        public void updateText() {
-            // get the current photo
-            int index = flipper.getDisplayedChild();
-            tblPhoto photo = currJourney.getPhotos().get(index);
-            // if this photo has a comment
-            if (!photo.getComment().isEmpty()) {
-                // add it to the comment box, make the box visible
-                text.setText(currJourney.getTitle() + ":\n" + photo.getComment());
-                text.setVisibility(View.VISIBLE);
-            } else {
-                // otherwise hide the comment box
-                text.setVisibility(View.GONE);
-            }
+
+    }
+
+    public void updateText() {
+        // get the current photo
+        int index = flipper.getDisplayedChild();
+        tblPhoto photo = currJourney.getPhotos().get(index);
+        String caption = "";
+
+        // if the photo has a caption
+        if (!photo.getComment().isEmpty()) {
+            caption = photo.getComment() + "\n";
         }
+
+        // add the timestamp
+        caption = caption + photo.gettimeStamp();
+        text.setText(caption);
+        text.setVisibility(View.VISIBLE);
     }
 
     public void clearFlipper() {
@@ -125,17 +149,19 @@ public class fragList extends Fragment {
         flipper.removeAllViews();
     }
     public void addToFlipper(tblJourney journey) {
-        // loop through photos
-        for (tblPhoto photo : journey.getPhotos()) {
-            // get the image file
-            File imgFile = new  File(photo.getimgURL());
-            if(imgFile.exists())
-            {
+        // TODO: be able to show more than one photo. currently the bitmaps are too large
+        if (!journey.getPhotos().isEmpty()) {
+            File imgFile = new File(journey.getPhotos().get(0).getimgURL());
+            if (imgFile.exists()) {
                 // create the imageview and add it to the flipper
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageURI(Uri.fromFile(imgFile));
                 flipper.addView(imageView);
             }
+        } else {
+            // if no photo, show the no photo text
+            text.setText("No Photos To Display");
+            text.setVisibility(View.VISIBLE);
         }
     }
 
@@ -148,6 +174,10 @@ public class fragList extends Fragment {
         clearFlipper();
         addToFlipper(journey);
         flipper.setVisibility(View.VISIBLE);
+        updateText();
+
+        // show the back button
+        back.setVisibility(View.VISIBLE);
     }
 
     // delete the passed-in journey

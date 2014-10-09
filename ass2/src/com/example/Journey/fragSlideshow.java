@@ -15,6 +15,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarOutputStream;
 
 /**
  * Created by Megan on 29/9/2014.
@@ -60,6 +61,7 @@ public class fragSlideshow extends Fragment {
 
         // fill journey list
         actJourney activity = (actJourney)getActivity();
+        activity.getMySql().checkOpen();
         journeys = activity.getMySql().getAllJourneys();
 
         // fill title list
@@ -92,13 +94,15 @@ public class fragSlideshow extends Fragment {
                 if (index == 0) {
                     // reset flipper and add all the pictures from all the journeys
                     clearFlipper();
+                    addToFlipper(journeys.get(0));
+                    /*TODO: add all journeys. currently just adds one so as to not go over memory
                     for (tblJourney journey : journeys) {
                         addToFlipper(journey);
-                    }
+                    }*/
                 } else {
                     // otherwise just reset and add this journey
                     clearFlipper();
-                    addToFlipper(journeys.get( index + 1 ));
+                    addToFlipper(journeys.get( index - 1 ));
                 }
 
                 // change views
@@ -155,17 +159,19 @@ public class fragSlideshow extends Fragment {
     }
 
     public void addToFlipper(tblJourney journey) {
-        // loop through photos
-        for (tblPhoto photo : journey.getPhotos()) {
-            // get the image file
-            File imgFile = new  File(photo.getimgURL());
-            if(imgFile.exists())
-            {
+        // TODO: be able to show more than one photo. currently the bitmaps are too large
+        if (!journey.getPhotos().isEmpty()) {
+            File imgFile = new File(journey.getPhotos().get(0).getimgURL());
+            if (imgFile.exists()) {
                 // create the imageview and add it to the flipper
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageURI(Uri.fromFile(imgFile));
                 flipper.addView(imageView);
             }
+        } else {
+            // if no photo, show the no photo text
+            comment.setText("No Photos To Display");
+            comment.setVisibility(View.VISIBLE);
         }
     }
     public void clearFlipper() {

@@ -9,17 +9,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/listTitle"
+            android:text="Untitled Journey"
             android:id="@+id/listTitle"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="false"
             android:textColor="#ff000000"
             android:textSize="20dp"
-            android:layout_centerHorizontal="true"
             android:typeface="serif"
             android:textIsSelectable="false"
-            android:layout_toRightOf="@+id/listImg"
-            android:layout_margin="5dp"/>
+            android:layout_toRightOf="@+id/listFrame"
+            android:singleLine="false"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -53,9 +54,16 @@
             android:background="#ff39a6ae"
             android:padding="50dp"
             android:layout_margin="5dp"
-            android:id="@+id/listImg"
-            android:layout_alignTop="@+id/listTitle"
+            android:id="@+id/listFrame"
             android:layout_alignParentBottom="false"
-            android:layout_alignBottom="@+id/listDist"></FrameLayout>
+            android:layout_alignTop="@+id/listTitle"
+            android:layout_alignBottom="@+id/listDist">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listImg"
+                android:contentDescription="Image"/>
+    </FrameLayout>
 
 </RelativeLayout>

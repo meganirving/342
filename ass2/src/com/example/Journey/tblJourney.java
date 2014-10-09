@@ -70,4 +70,30 @@ public class tblJourney {
     public void addPhoto(tblPhoto newPhoto) {
         photos.add(newPhoto);
     }
+
+    // get biggest photo ID
+    public int nextPhotoID() {
+        // default value
+        int largest = 0;
+        // loop through
+        for (tblPhoto photo : photos) {
+            // get new biggest value
+            if (photo.getID() > largest) {
+                largest = photo.getID();
+            }
+        }
+        return largest+1;
+    }
+    public int nextPointID() {
+        // default value
+        int largest = 0;
+        // loop through
+        for (tblPoint point : points) {
+            // get new biggest value
+            if (point.getID() > largest) {
+                largest = point.getID();
+            }
+        }
+        return largest+1;
+    }
 }

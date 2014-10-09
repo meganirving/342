@@ -13,4 +13,5 @@
     <string name="btnResume">Play</string>
     <string name="btnStop">Stop</string>
     <string name="imgPlaceholder">Placeholder</string>
+    <string name="btnBack">Back</string>
 </resources>

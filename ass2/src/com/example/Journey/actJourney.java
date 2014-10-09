@@ -19,28 +19,25 @@ import com.google.android.gms.location.LocationRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class actJourney extends Activity implements
-        GooglePlayServicesClient.ConnectionCallbacks,
-        GooglePlayServicesClient.OnConnectionFailedListener,
-        LocationListener {
+public class actJourney extends Activity implements GooglePlayServicesClient.ConnectionCallbacks,
+        GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
 
     // Milliseconds per second
     private static final int MILLISECONDS_PER_SECOND = 1000;
     // Update frequency in seconds
     public static final int UPDATE_INTERVAL_IN_SECONDS = 60;
     // Update frequency in milliseconds
-    private static final long UPDATE_INTERVAL =
-            MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
+    private static final long UPDATE_INTERVAL = MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
     // The fastest update frequency, in seconds
     private static final int FASTEST_INTERVAL_IN_SECONDS = 5;
     // A fast frequency ceiling in milliseconds
-    private static final long FASTEST_INTERVAL =
-            MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
+    private static final long FASTEST_INTERVAL = MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
     // Define an object that holds accuracy and frequency parameters
     LocationRequest mLocationRequest;
     LocationClient mLocationClient;
+    Location mCurrentLocation;
     boolean mUpdatesRequested;
     private MySQLHelper mySql;
 
@@ -56,9 +53,9 @@ public class actJourney extends Activity implements
 
         // check google play services
         if (servicesConnected()) {
-            Log.v("journey", "yep");
+            Log.v("journey", "connected to Google Play");
         } else {
-            Log.v("journey", "nope");
+            Log.v("journey", "not connected to Google Play");
         }
 
         // Create the LocationRequest object
@@ -124,29 +121,46 @@ public class actJourney extends Activity implements
         return mySql;
     }
 
+    // see if there's a camera on the phone
+    public boolean isCamera() {
+        if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
+        }
+    }
+
     // interface with location stuff
     public boolean startTracking() {
         // if it's already connected
         if (mLocationClient.isConnected()) {
+            // get final location
+            mCurrentLocation = mLocationClient.getLastLocation();
+            if (mCurrentLocation != null) {
+                Toast.makeText(this, "got location!", Toast.LENGTH_SHORT);
+                fJourney.updateLocation(mCurrentLocation);
+            }
+            // request continual updates
             mUpdatesRequested = true;
             mLocationClient.requestLocationUpdates(mLocationRequest, this);
             return true;
         } else {
             // try to connect
             mLocationClient.connect();
-            // if it's now connected
-            if (mLocationClient.isConnected()) {
-                mUpdatesRequested = true;
-                mLocationClient.requestLocationUpdates(mLocationRequest, this);
-                return true;
-            } else {
-                // error
-                return false;
-            }
+            return false;
         }
     }
     public void stopTracking() {
         if (mLocationClient.isConnected()) {
+            // get final location
+            mCurrentLocation = mLocationClient.getLastLocation();
+            if (mCurrentLocation != null) {
+                fJourney.updateLocation(mCurrentLocation);
+                Toast.makeText(this, "got location!", Toast.LENGTH_SHORT);
+            }
+            // stop tracking
             mUpdatesRequested = false;
             mLocationClient.removeLocationUpdates(this);
         }
@@ -155,6 +169,8 @@ public class actJourney extends Activity implements
     // location stuff
     @Override
     public void onLocationChanged(Location location) {
+        Toast.makeText(this, "location changed!", Toast.LENGTH_SHORT);
+        Log.v("journey", "location changed!");
         // pass the new location to the fragment
         fJourney.updateLocation(location);
     }

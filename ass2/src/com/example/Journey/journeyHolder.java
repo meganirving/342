@@ -1,6 +1,7 @@
 package com.example.Journey;
 
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -10,4 +11,5 @@ public class journeyHolder {
     public TextView title;
     public TextView date;
     public TextView distance;
+    public ImageView thumbnail;
 }

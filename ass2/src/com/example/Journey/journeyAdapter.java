@@ -6,10 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.w3c.dom.Text;
+import com.example.Journey.BitmapWrapper;
 
 import java.util.ArrayList;
+
+import static com.example.Journey.BitmapWrapper.decodeSampledBitmapFromPath;
 
 /**
  * Created by Megan on 6/10/2014.
@@ -39,11 +43,13 @@ public class journeyAdapter extends ArrayAdapter<tblJourney> {
             TextView title = (TextView) convertView.findViewById(R.id.listTitle);
             TextView date = (TextView) convertView.findViewById(R.id.listDate);
             TextView dist = (TextView) convertView.findViewById(R.id.listDist);
+            ImageView thumb = (ImageView) convertView.findViewById(R.id.listImg);
 
             // set static holder
             holder.title = title;
             holder.date = date;
             holder.distance = dist;
+            holder.thumbnail = thumb;
             convertView.setTag(holder);
         }
         else {
@@ -57,6 +63,11 @@ public class journeyAdapter extends ArrayAdapter<tblJourney> {
         holder.title.setText(journey.getTitle());
         holder.date.setText(journey.getDate());
         holder.distance.setText("5km");
+
+        // TODO: was supposed to shrink a photo to turn it into a thumbnail
+        /*if (!journey.getPhotos().isEmpty()) {
+            holder.thumbnail.setImageBitmap(decodeSampledBitmapFromPath(journey.getPhotos().get(0).getimgURL(), 100, 70));
+        }*/
 
         return convertView;
     }
