@@ -148,7 +148,7 @@ public class MyActivity extends Activity
         mediaPlayer.start();
 
         // upload message
-        new PostMessageAsyncTask().execute();
+        //new PostMessageAsyncTask().execute();
     }
 
     // Uses AsyncTask to create a task away from the main UI thread. This task takes a
@@ -223,6 +223,7 @@ public class MyActivity extends Activity
                     temp.setName(jObject.getString("yoDestination"));
                     temp.setMsg(jObject.getString("yoMessage"));
                     temp.setImgURL(jObject.getString("imageURL"));
+                    temp.setAudioURL(jObject.getString("imageURL"));
 
                     // add it to the list
                     messages.add(temp);
@@ -242,7 +243,6 @@ public class MyActivity extends Activity
 
         protected void onProgressUpdate(int count) {
             Log.v("ugh", count + "% progress");
-            //Toast.makeText(getApplicationContext(), count + "% loaded", Toast.LENGTH_SHORT).show();
         }
 
 

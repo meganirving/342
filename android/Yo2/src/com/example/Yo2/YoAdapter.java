@@ -56,8 +56,8 @@ public class YoAdapter extends ArrayAdapter<YoCatch> {
         holder.txtMsg.setText(msg.getMsg());
 
         if (msg.getImg() != null) {
-            //int padding = (66 - msg.getImg().getWidth()) / 2;
-            //holder.img.setPadding(padding, 0, padding, 0);
+            int padding = (66 - msg.getImg().getWidth()) / 2;
+            holder.img.setPadding(padding, 0, padding, 0);
             holder.img.setImageBitmap(msg.getImg());
         }
 

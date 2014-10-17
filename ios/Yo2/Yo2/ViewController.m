@@ -76,13 +76,15 @@
     }
     
     // load/create history array
-   // self.filePath = @"save.bin";
-    //NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory,NSUserDomainMask, YES);
-    //NSString* docDirect = [paths lastObject];
-    //NSString* path = [docDirect stringByAppendingPathComponent:self.filePath];
-   // self.history = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-    self.history = [[NSMutableArray alloc] init];
-    
+    self.filePath = @"save.bin";
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* docDirect = [paths lastObject];
+    NSString* path = [docDirect stringByAppendingPathComponent:self.filePath];
+    self.history = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    if (self.history == NULL)
+    {
+        self.history = [[NSMutableArray alloc] init];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,18 +141,17 @@
     [ self.history addObject:newModel ];
     
     // serialise array
-    //NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory,NSUserDomainMask, YES);
-    //NSString* docDirect = [paths lastObject];
-    //NSString* path = [docDirect stringByAppendingPathComponent:self.filePath];
-    //BOOL success = [NSKeyedArchiver archiveRootObject:self.history toFile:path];
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* docDirect = [paths lastObject];
+    NSString* path = [docDirect stringByAppendingPathComponent:self.filePath];
+    BOOL success = [NSKeyedArchiver archiveRootObject:self.history toFile:path];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"MySegue"])
     {
-        //HistoryController *hC = [ segue destinationViewController];
-       // [hC setHistory:self.history];
+        [segue.destinationViewController setHistory:self.history];
     }
     return;
 }

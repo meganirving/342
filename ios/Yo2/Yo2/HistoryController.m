@@ -18,24 +18,6 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
-        
-        self.history = [[NSMutableArray alloc] init];
-        YoCatchModel *newModel = [[YoCatchModel alloc] init];
-        [ newModel Init:@"Megan" and:@"Yo" ];
-        [ self.history addObject:newModel ];
-        [ newModel Init:@"Scott" and:@"Sup" ];
-        [ self.history addObject:newModel ];
-        [ newModel Init:@"Alex" and:@"Hey" ];
-        [ self.history addObject:newModel ];
-        [ newModel Init:@"Tyson" and:@"Hi" ];
-        [ self.history addObject:newModel ];
-        
-        // Custom initialization
-    }
-    
-    self.buttonOutlet.title = NSLocalizedString(@"Back", nil);
-    self.barOutlet.topItem.title = NSLocalizedString(@"All", nil);
     
     return self;
 }
@@ -43,6 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.buttonOutlet.title = NSLocalizedString(@"Back", nil);
+    self.barOutlet.topItem.title = NSLocalizedString(@"All", nil);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -53,7 +38,7 @@
 
 - (void)setHistory:(NSMutableArray *)newHist
 {
-    self.history = newHist;
+    _history = newHist;
 }
 
 - (void)didReceiveMemoryWarning

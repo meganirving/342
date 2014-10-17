@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -24,19 +26,36 @@ public class HistoryActivity extends Activity {
     public static final int THUMBNAIL_HEIGHT = 100;
     public static final int THUMBNAIL_WIDTH = 100;
     private ArrayList<YoCatch> history;
+    private ArrayList<YoSound> tracks;
+    public int loaded;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
 
-        // get array
+        // get/create arrays
         Intent intent = getIntent();
         history = (ArrayList<YoCatch>) intent.getSerializableExtra("historyList");
+        tracks = new ArrayList<YoSound>();
 
-        // load images
+        // load stuff
+        loaded = 0;
         new CreateImgs().execute();
+        new LoadSounds().execute();
+    }
 
+    public YoSound getTrack(String name) {
+        // loop through all tracks
+        for (YoSound track : tracks) {
+            // return the track with a matching name
+            if (track.getName() == name) {
+                return track;
+            }
+        }
+
+        // otherwise return null
+        return null;
     }
 
     public void showList() {
@@ -53,8 +72,60 @@ public class HistoryActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // plays appropriate sound
+                YoCatch item = (YoCatch)parent.getItemAtPosition(position);
+                YoSound track = getTrack(item.getName());
+                if (track != null) {
+                    track.getTrack().start();
+                }
             }
         });
+    }
+
+    private class LoadSounds extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... v) {
+            // loop through all messages
+            for (YoCatch msg : history) {
+                // if there's an audio track at all
+                if (!msg.getAudioURL().isEmpty()) {
+                    // if it doesn't already exist
+                    if (getTrack(msg.getName()) == null) {
+                        // load track
+                        try {
+                            // create and prepare a mediaplayer
+                            MediaPlayer mediaPlayer = new MediaPlayer();
+                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                            mediaPlayer.setDataSource(msg.getAudioURL());
+                            mediaPlayer.prepare();
+
+                            // create a YoSound wrapper
+                            YoSound temp = new YoSound();
+                            temp.setTrack(mediaPlayer);
+                            temp.setName(msg.getName());
+
+                            // add to the list
+                            tracks.add(temp);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        protected void onPreExecute() {
+            Toast.makeText(getApplicationContext(), "Loading sounds...", Toast.LENGTH_SHORT).show();
+        }
+
+        // show the list only once the images are loaded
+        protected void onPostExecute(Void v) {
+            Toast.makeText(getApplicationContext(), "Sounds loaded", Toast.LENGTH_SHORT).show();
+            loaded++;
+            if (loaded == 2)
+                showList();
+        }
     }
 
     private class CreateImgs extends AsyncTask<String, Void, Void> {
@@ -90,7 +161,9 @@ public class HistoryActivity extends Activity {
         // show the list only once the images are loaded
         protected void onPostExecute(Void v) {
             Toast.makeText(getApplicationContext(), "Images loaded", Toast.LENGTH_SHORT).show();
-            showList();
+            loaded++;
+            if (loaded == 2)
+                showList();
         }
     }
 
